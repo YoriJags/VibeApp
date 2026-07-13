@@ -180,7 +180,7 @@ async def get_cities():
 @router.get("/venues")
 async def get_venues(city: Optional[str] = None):
     """Get all venues, optionally filtered by city. Attaches ratings_last_30m for spike detection."""
-    query = {"city": city} if city else {}
+    query = {"city": city.lower()} if city else {}
     venues = await db.venues.find(query, {"_id": 0}).to_list(100)
 
     # Attach 30-min rating counts for seismic ring display

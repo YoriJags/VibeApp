@@ -652,10 +652,9 @@ async def calculate_venue_aggregate(venue_id: str) -> dict:
 
     # ── Scout consensus ───────────────────────────────────────────────────────
     # Independent scouts agreeing on energy within 10 mins = strong signal
-    ten_min_ago      = now - timedelta(minutes=10)
     consensus_window = [
         r for r in ratings
-        if r.get("timestamp", now) >= ten_min_ago
+        if _minutes_since(r.get("timestamp", now), now) <= 10
     ]
     # Deduplicate by user — only count each scout once
     seen_users: set = set()
