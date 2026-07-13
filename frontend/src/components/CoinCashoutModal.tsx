@@ -17,7 +17,7 @@ import {
   Platform,
 } from 'react-native';
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL ?? '';
+const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL ?? '';
 
 interface Bank { name: string; code: string; }
 interface BankAccount { saved: boolean; account_name?: string; account_number_masked?: string; bank_code?: string; }
