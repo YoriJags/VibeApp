@@ -25,6 +25,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useVibeStore } from '../store/vibeStore';
 import { calculateDistance } from '../utils/geo';
+import { getBoltCoordinates } from '../utils/boltLocation';
 import { resolveSkinPalette } from '../config/skins';
 import SurgeFullScreen, { SurgeState } from './SurgeFullScreen';
 import MomentOverlay, { MomentOverlayProps } from './MomentOverlay';
@@ -961,9 +962,10 @@ export default function VibeReactor({
     }
 
     if (!cooldown && !tapping) {
+      const coordinates = await getBoltCoordinates();
       await retryPost<SurgeState>(
         `${API_URL}/api/venues/${venueId}/bolt`,
-        { method: 'POST', headers: getAuthHeaders() },
+        { method: 'POST', headers: getAuthHeaders(), body: JSON.stringify({ coordinates }) },
         {
           onOptimistic: () => setLocalTapCount(c => c + 1),
           onSuccess:    (data) => setSurge(data),

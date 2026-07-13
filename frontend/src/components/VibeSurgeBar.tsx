@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Haptics from 'expo-haptics';
 import { useVibeStore } from '../store/vibeStore';
 import SurgeFullScreen from './SurgeFullScreen';
+import { getBoltCoordinates } from '../utils/boltLocation';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
@@ -138,7 +139,8 @@ export default function VibeSurgeBar({ venueId, venueName, isDemoMode, onElectri
     }
     setTapping(true);
     try {
-      const res = await fetch(API_URL + '/api/venues/' + venueId + '/bolt', { method: 'POST', headers: getAuthHeaders() });
+      const coordinates = await getBoltCoordinates();
+      const res = await fetch(API_URL + '/api/venues/' + venueId + '/bolt', { method: 'POST', headers: getAuthHeaders(), body: JSON.stringify({ coordinates }) });
       if (res.ok) { const data = await res.json(); setSurge(data); }
       else if (res.status === 429) { setCooldown(true); setTimeout(() => setCooldown(false), 10000); }
     } catch {}

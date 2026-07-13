@@ -23,14 +23,29 @@ Squad Surge:
 
 Socket.IO: broadcasts surge_update when level changes.
 """
+import os
 from datetime import datetime, timedelta, timezone
-from fastapi import APIRouter, Depends, HTTPException
+from typing import Optional
+
+from fastapi import APIRouter, Body, Depends, HTTPException
 
 from app.config import db, sio, logger
+from app.models import Coordinates
 from app.services.auth import require_auth
 from app.services.expo_push import send_push_notifications
+from app.services.vibe import is_within_geofence
+from app.services import surge_policy
 
 router = APIRouter(tags=["surge"])
+
+# Honest-scarcity rules (presence damping, ELECTRIC gate, sustain window).
+# Set SURGE_STRICT=0 to relax for a demo night; default is strict.
+SURGE_STRICT = os.environ.get("SURGE_STRICT", "1") != "0"
+
+
+def _utc(ts: datetime) -> datetime:
+    """Mongo returns naive UTC datetimes; normalize before arithmetic."""
+    return ts.replace(tzinfo=timezone.utc) if ts.tzinfo is None else ts
 
 LEVELS = [
     (0.00, 0.08, "dormant",  "DORMANT",   "#3A3A4E"),
@@ -62,7 +77,15 @@ async def _compute_surge(venue_id):
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(hours=3)
     bolts = await db.venue_bolts.find({"venue_id": venue_id, "ts": {"$gte": cutoff}}).to_list(2000)
-    weighted = sum(_time_weight((now - b["ts"]).total_seconds() / 60) * b.get("multiplier", 1.0) for b in bolts)
+
+    def _bolt_weight(b):
+        w = _time_weight((now - _utc(b["ts"])).total_seconds() / 60) * b.get("multiplier", 1.0)
+        if SURGE_STRICT:
+            # Legacy bolts (no "present" field) predate presence tracking; count them fully.
+            w *= surge_policy.presence_weight(b.get("present", True))
+        return w
+
+    weighted = sum(_bolt_weight(b) for b in bolts)
     checkin_count = await db.checkins.count_documents({"venue_id": venue_id, "checked_out_at": None})
     # Diversity-scaled threshold: solo is harder, crowd gets easier as unique tappers grow
     unique_tappers = len(set(b["user_id"] for b in bolts))
@@ -75,13 +98,40 @@ async def _compute_surge(venue_id):
         diversity_factor = max(0.4, 1.0 - (unique_tappers - 3) * 0.06)  # crowd — easier
     threshold = round(base * diversity_factor)
     charge_pct = min(weighted / threshold, 1.0)
+    meta = await db.venue_surge_meta.find_one({"venue_id": venue_id}) or {}
+
+    gate_open = True
+    if SURGE_STRICT:
+        # ── ELECTRIC corroboration gate + sustain window ──────────────────────
+        recent = now - timedelta(minutes=30)
+        present_tappers = len({
+            b["user_id"] for b in bolts
+            if b.get("present", True) and _utc(b["ts"]) >= recent
+        })
+        hot_ratings = await db.ratings.count_documents({
+            "venue_id": venue_id,
+            "timestamp": {"$gte": recent},
+            "energy": {"$in": ["lit", "peak"]},
+        })
+        gate_open = surge_policy.electric_gate_open(present_tappers, hot_ratings)
+        charge_pct = surge_policy.apply_electric_gate(charge_pct, gate_open)
+
+        prev_candidate = meta.get("electric_candidate_since")
+        prev_candidate = _utc(prev_candidate) if prev_candidate else None
+        charge_pct, candidate_since = surge_policy.sustain_state(charge_pct, prev_candidate, now)
+        if candidate_since != prev_candidate:
+            await db.venue_surge_meta.update_one(
+                {"venue_id": venue_id},
+                {"$set": {"electric_candidate_since": candidate_since}},
+                upsert=True,
+            )
+
     level, label, color = _level_for(charge_pct)
     level_idx = next(i for i, row in enumerate(LEVELS) if row[2] == level)
     lo_pct, hi_pct = LEVELS[level_idx][0], LEVELS[level_idx][1]
     band = hi_pct - lo_pct
     level_progress = round((charge_pct - lo_pct) / band, 3) if band > 0 else 1.0
     taps_to_next = max(0, round(hi_pct * threshold - weighted)) if level != "electric" else 0
-    meta = await db.venue_surge_meta.find_one({"venue_id": venue_id}) or {}
     return {
         "charge_pct": round(charge_pct, 3),
         "level": level, "level_label": label, "level_color": color,
@@ -99,12 +149,26 @@ async def get_venue_surge(venue_id: str):
     return await _compute_surge(venue_id)
 
 @router.post("/venues/{venue_id}/bolt")
-async def drop_bolt(venue_id: str, user: dict = Depends(require_auth)):
+async def drop_bolt(
+    venue_id: str,
+    coordinates: Optional[Coordinates] = Body(default=None, embed=True),
+    user: dict = Depends(require_auth),
+):
     now = datetime.now(timezone.utc)
     user_id = user["id"]
     venue = await db.venues.find_one({"id": venue_id})
     if not venue:
         raise HTTPException(status_code=404, detail="Venue not found")
+
+    # Verified presence: coordinates inside the venue geofence. Taps without
+    # verified presence still land but are damped in strict mode (surge_policy).
+    is_present = False
+    if coordinates is not None and venue.get("coordinates"):
+        is_present = is_within_geofence(
+            coordinates,
+            Coordinates(**venue["coordinates"]),
+            radius_m=venue.get("geofence_radius_m", 100),
+        )
     # Rate limit: 1 bolt per 10 seconds
     if await db.venue_bolts.find_one({"venue_id": venue_id, "user_id": user_id, "ts": {"$gte": now - timedelta(seconds=10)}}):
         raise HTTPException(status_code=429, detail="Too fast - hold on a moment")
@@ -120,7 +184,10 @@ async def drop_bolt(venue_id: str, user: dict = Depends(require_auth)):
         })
         if crew_taps >= 1:
             multiplier, is_squad_surge = 1.5, True
-    await db.venue_bolts.insert_one({"venue_id": venue_id, "user_id": user_id, "ts": now, "multiplier": multiplier})
+    await db.venue_bolts.insert_one({
+        "venue_id": venue_id, "user_id": user_id, "ts": now,
+        "multiplier": multiplier, "present": is_present,
+    })
     surge = await _compute_surge(venue_id)
     meta = await db.venue_surge_meta.find_one({"venue_id": venue_id}) or {}
     prev_level = meta.get("last_level", "dormant")
@@ -164,4 +231,4 @@ async def drop_bolt(venue_id: str, user: dict = Depends(require_auth)):
                     )
             except Exception as e:
                 logger.warning(f"ELECTRIC push failed: {e}")
-    return {**surge, "squad_multiplier": multiplier, "is_squad_surge": is_squad_surge}
+    return {**surge, "squad_multiplier": multiplier, "is_squad_surge": is_squad_surge, "is_present": is_present}

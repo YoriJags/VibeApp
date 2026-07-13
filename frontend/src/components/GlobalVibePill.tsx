@@ -39,6 +39,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useVibeStore } from '../store/vibeStore';
 import SurgeFullScreen, { SurgeState } from './SurgeFullScreen';
+import { getBoltCoordinates } from '../utils/boltLocation';
 
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
@@ -244,8 +245,9 @@ export default function GlobalVibePill() {
     if (cooldown || tapping || !activeVenueId) return;
     setTapping(true);
     try {
+      const coordinates = await getBoltCoordinates();
       const res = await fetch(`${API_URL}/api/venues/${activeVenueId}/bolt`, {
-        method: 'POST', headers: getAuthHeaders(),
+        method: 'POST', headers: getAuthHeaders(), body: JSON.stringify({ coordinates }),
       });
       if (res.ok) setSurge(await res.json());
       else if (res.status === 429) { setCooldown(true); setTimeout(() => setCooldown(false), 10000); }
