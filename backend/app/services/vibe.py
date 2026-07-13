@@ -812,8 +812,10 @@ async def calculate_venue_aggregate(venue_id: str) -> dict:
         "kinetic_momentum":   live["momentum_floor"],
         "decay_protected":    live["decay_protected"],
         "fraud_excluded":     live["excluded_fraud"],
-        # Vibe DNA
-        "vibe_signature":     sig,
+        # Vibe DNA — string label only; city_pulse majority vote and the
+        # frontend VibeSignature type both expect the bare signature
+        "vibe_signature":        sig["signature"],
+        "vibe_signature_detail": sig,
         # Oracle forward prediction
         "oracle":             oracle,
         # Transparency

@@ -69,6 +69,8 @@ async def compute_city_pulse(city: str) -> dict:
         sig_votes: dict[str, float] = {}
         for v in active_venues:
             sig = v.get("vibe_signature")
+            if isinstance(sig, dict):  # legacy docs stored the full detail object
+                sig = sig.get("signature")
             if sig:
                 weight = v.get("current_vibe_score", 1)
                 sig_votes[sig] = sig_votes.get(sig, 0) + weight
