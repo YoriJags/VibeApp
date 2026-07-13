@@ -152,5 +152,51 @@ async def wipe():
     print(f"Wiped {cleared} demo ratings, {deleted.deleted_count} demo users; aggregates recomputed")
 
 
+async def add_demo_venue(name: str, lat: float, lng: float, radius_m: int = 3000):
+    """Create a rateable venue at the demo location with a wide geofence so
+    everyone in the room can submit real vibe checks. Removed by --wipe."""
+    venue_id = f"demo-venue-{uuid.uuid4().hex[:8]}"
+    await db.venues.insert_one({
+        "id": venue_id,
+        "name": name,
+        "address": "Demo location",
+        "area": "Lekki",
+        "city": "lagos",
+        "venue_type": "lounge",
+        "coordinates": {"lat": lat, "lng": lng},
+        "geofence_radius_m": radius_m,
+        "current_vibe_score": 55,
+        "energy_level": "warming",
+        "capacity_level": "vibrant",
+        "gate_level": "clear",
+        "vibe_velocity": "heating_up",
+        "is_verified": True,
+        "is_demo": True,
+        "profile_views": 40,
+        "direction_clicks": 5,
+        "entry_fee": "Free Entry",
+        "music_genre": "Afrobeats",
+        "tables_available": True,
+        "last_snapshot_time": datetime.now(timezone.utc),
+    })
+    print(f"Demo venue '{name}' created ({venue_id}) at {lat},{lng} radius={radius_m}m")
+
+
+async def wipe_demo_venues():
+    res = await db.venues.delete_many({"is_demo": True})
+    return res.deleted_count
+
+
 if __name__ == "__main__":
-    asyncio.run(wipe() if "--wipe" in sys.argv else seed())
+    if "--venue" in sys.argv:
+        i = sys.argv.index("--venue")
+        name, lat, lng = sys.argv[i + 1], float(sys.argv[i + 2]), float(sys.argv[i + 3])
+        asyncio.run(add_demo_venue(name, lat, lng))
+    elif "--wipe" in sys.argv:
+        async def _full_wipe():
+            n = await wipe_demo_venues()
+            print(f"Removed {n} demo venues")
+            await wipe()
+        asyncio.run(_full_wipe())
+    else:
+        asyncio.run(seed())
