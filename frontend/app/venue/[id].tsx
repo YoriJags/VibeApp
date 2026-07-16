@@ -17,6 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Location from 'expo-location';
+import { getBoltCoordinates } from '../../src/utils/boltLocation';
 import * as Haptics from 'expo-haptics';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -119,6 +120,26 @@ export default function VenueDetailScreen() {
   useAmbientMeter(id as string, isWithinGeofence, ambientOptedIn);
 
   // Show opt-in prompt once when scout first enters geofence
+  // ── Orbit heartbeat: tell the venue someone is watching its energy ──────────
+  useEffect(() => {
+    if (!id) return;
+    let alive = true;
+    const ping = async () => {
+      try {
+        const coordinates = await getBoltCoordinates();
+        if (!alive) return;
+        await fetch(`${API_URL}/api/venues/${id}/orbit/ping`, {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: JSON.stringify({ coordinates }),
+        });
+      } catch {}
+    };
+    ping();
+    const t = setInterval(ping, 60_000);
+    return () => { alive = false; clearInterval(t); };
+  }, [id]);
+
   useEffect(() => {
     if (!isWithinGeofence) return;
     AsyncStorage.getItem('ambient_opt_in').then(val => {

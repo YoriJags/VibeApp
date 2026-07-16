@@ -1,6 +1,7 @@
 # VIIBE — Energy Layer Build Plan
 
-**Mission:** Ship the GIS for live human energy. Decay-honest, scout-confirmed, B2B-credible.
+**Mission:** Ship the GIS for live human energy. Wherever people gather, there is energy; VIIBE measures it. Decay-honest, scout-confirmed, B2B-credible.
+**Category:** Not a nightlife app — a live-energy intel layer. Nightlife is the beachhead scene, not the identity.
 **Doctrine:** Poco a poco. A-tier now, S-tier at scale gates. **Compress, don't expand.**
 **Funding model:** Reachng generates runway. VIIBE runs lean until 10/10 milestone hits.
 **Last updated:** 2026-05-09
@@ -16,7 +17,47 @@ Pre-investment target. The single falsifiable goal everything else serves:
 Until this is hit, Phases 9 + 10 stay frozen. Anything that doesn't move the corridor toward this number waits.
 
 **Public pitch:** *"VIIBE shows you where Lagos is alive right now."*
-**Investor pitch:** *"Consumer app collects real-time crowd data. Merchant dashboard monetizes it. API becomes the intelligence layer."*
+**Investor pitch:** *"A decentralized sensor network for live human energy — scouts stake reputation on signals, venues pay for the truth, agents buy the feed. Nightlife is market one."*
+
+---
+
+## Positioning — the three languages (never mix them)
+
+VIIBE is a **live-energy intel market**: wherever people gather there is energy,
+and VIIBE measures it. But vision is not product. Every horizontal platform won
+a vertical first (Facebook = colleges, Amazon = books, Uber = one city's black
+cars). Nightlife is the beachhead because its energy signal decays fastest
+(minutes, not hours), a paying buyer exists tonight (venues with zero promo
+attribution), and it's where the scout habit forms. The architecture is already
+scene-agnostic — `taxonomy_id` on ratings, venue-specific rating dimensions for
+concerts/festivals/block parties, a decay engine that doesn't know what a
+nightclub is. Expansion is config, not a rebuild.
+
+| Audience | Language | Never say |
+|----------|----------|-----------|
+| **Consumer** (app store, friends) | "See where Lagos is alive right now." | "intel market", "energy layer" — nobody downloads an abstraction |
+| **Investor / acquirer** | Decentralized intel market for live human energy: staked predictions (Prediction Market), credibility-weighted signals, tokenized contributions (`signal_token`), accuracy-scored scouts, honest-scarcity gates (surge policy), agent API selling the aggregate. Nightlife proves the signal moves money. | "nightlife app" — that's a feature-graveyard category |
+| **Roadmap** | Expand by **event shape**, not ambition: concerts + Detty December events first (same scouts, same promoter-buyers), then owambe / match-viewing / conferences after the corridor proves out. | city lists, TAM slides |
+
+The market mechanics already exist in code. The positioning job is to *name*
+them, not build them.
+
+**The 10/10 milestone does not move because the vision grew.** A bigger thesis
+makes the narrow proof more important, not less.
+
+### Venue gravity surfaces (demand-side proof, merchant-side desire)
+
+Two mechanics that make venues *want* the intel market on their walls:
+
+- **Big Screen (projection mode)** — `/screen/{venue_id}`: a venue projects its
+  live reactor on the wall; the crowd sees their taps push the room up the
+  city's energy strata toward ELECTRIC. The loop runs in everyone's favor:
+  screen → crowd taps → verified signal → screen gets hotter. Distribution
+  disguised as decoration.
+- **Watchers in orbit** — people who want to be there but can't, actively
+  monitoring the venue's energy from outside the geofence. Surfaced to the
+  merchant ("43 watching you right now") as live demand pressure — the number
+  that converts a pilot into a paying account.
 
 ---
 

@@ -58,6 +58,7 @@ from app.routes.intelligence import router as intelligence_router
 from app.routes.claims import router as claims_router
 from app.routes.bookings import router as bookings_router
 from app.routes.surge import router as surge_router
+from app.routes.orbit import router as orbit_router
 from app.routes.aura import router as aura_router
 from app.routes.tap_history import router as tap_history_router
 from app.routes.dna import router as dna_router
@@ -135,6 +136,7 @@ api_router.include_router(intelligence_router)
 api_router.include_router(claims_router)
 api_router.include_router(bookings_router)
 api_router.include_router(surge_router)
+api_router.include_router(orbit_router)
 api_router.include_router(aura_router)
 api_router.include_router(tap_history_router)
 api_router.include_router(dna_router)
@@ -181,6 +183,17 @@ async def health():
 @app.get("/", tags=["health"])
 async def root():
     return {"service": "VIIBE Scene Intelligence API", "status": "ok", "docs": "/docs"}
+
+
+# ── Venue Big Screen (projection mode) — clean root URL for venue walls ──
+@app.get("/screen/{venue_id}", tags=["screen"])
+async def venue_big_screen(venue_id: str):
+    from pathlib import Path as _Path
+    from fastapi.responses import HTMLResponse as _HTMLResponse
+    screen_path = _Path(__file__).parent / "static" / "screen.html"
+    if screen_path.exists():
+        return _HTMLResponse(content=screen_path.read_text(encoding="utf-8"), status_code=200)
+    return _HTMLResponse(content="<h1>Big Screen not found</h1>", status_code=404)
 
 # ===== Middleware =====
 app.add_middleware(RateLimitMiddleware)

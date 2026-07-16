@@ -275,6 +275,10 @@ async def get_merchant_venue_stats(venue_id: str, request: Request):
     profile_views = venue.get("profile_views", 0)
     direction_clicks = venue.get("direction_clicks", 0)
 
+    # Live orbit: people watching this venue's energy right now (demand pressure)
+    from app.routes.orbit import _orbit_counts
+    orbit = await _orbit_counts(venue_id)
+
     # District average for Heatmap Delta
     district_venues = await db.venues.find({
         "city": venue.get("city"),
@@ -337,6 +341,7 @@ async def get_merchant_venue_stats(venue_id: str, request: Request):
             "ratings_24h": ratings_24h,
             "ratings_7d": ratings_7d,
             "profile_views": profile_views,
+        "orbit": orbit,
             "direction_clicks": direction_clicks,
             "current_rank": rank,
             "total_area_venues": len(all_area_venues),

@@ -1,10 +1,12 @@
-# Vibe App - Nigeria's Real-Time Nightlife Platform
+# VIIBE — The Live Human Energy Layer
 
 <p align="center">
   <img src="./docs/vibe-logo.png" alt="Vibe Logo" width="120" />
 </p>
 
-**Vibe** is a high-velocity, real-time nightlife "Stock Market" for Nigeria. Users can discover trending venues, rate the vibe, and receive flash deals. Venue owners can boost visibility through Pulse Drops and track ROI metrics.
+**VIIBE** measures live human energy: wherever people gather, scouts confirm what the room actually feels like, right now — decay-honest, credibility-weighted, never faked. Consumers see where the city is alive; venues see their pull (live watchers, verified arrivals, energy strata); agents and partners buy the aggregate signal through the intel API.
+
+**Nightlife in Lagos is market one** — the scene where energy decays fastest and the truth is worth the most. The architecture is scene-agnostic (rating taxonomies, venue-type dimensions, a decay engine that doesn't care what the gathering is); concerts, festivals, and street events are configuration, not rebuilds.
 
 ## Table of Contents
 
