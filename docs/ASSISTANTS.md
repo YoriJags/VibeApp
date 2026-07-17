@@ -32,11 +32,11 @@ account action — cannot be done from the repo.)
 
 ## Lane 2 — OS assistants launch VIIBE
 
-  **Android (in this build)**: home-screen City Pulse widget (react-native-android-widget, src/widgets/) — live Lagos energy on the phone wall, refreshes every 30 min, taps open the app. (Launcher shortcuts pending a compatible expo-quick-actions release.)
-  ("Where's alive now" / "Drop a vibe check") and the
-  **City Pulse home-screen widget** (`react-native-android-widget`,
-  `src/widgets/`) — live Lagos energy on the phone wall, refreshes every
-  30 min, taps open the app.
+- **Android (in this build)**: the **City Pulse home-screen widget**
+  (`react-native-android-widget`, `src/widgets/`) — live Lagos energy on the
+  phone wall, refreshes every 30 min, taps open the app. (Launcher shortcuts
+  are pending a compatible `expo-quick-actions` release — the v6 package's
+  entry point breaks the JS bundle on this Expo SDK.)
 - **Siri**: App Intents — requires the iOS build (roadmap; honest answer to
   investors: "weeks after the iOS build exists, the feed is already live").
 
