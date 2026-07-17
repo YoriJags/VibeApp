@@ -1,3 +1,0 @@
-line with backtick: `hello world`
-line with dollar: ${VAR}
-line with single: it's fine

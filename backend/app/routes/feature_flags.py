@@ -43,6 +43,29 @@ FLAG_META: Dict[str, dict] = {
 
 DEFAULT_FLAGS: Dict[str, bool] = {key: True for key in FLAG_META}
 
+# ── LAUNCH_MODE: the R0 knife ────────────────────────────────────────────────
+# LAUNCH_MODE=1 forces the dark set OFF regardless of DB flags. The launch app
+# is: map + vibe check + reactor + venue detail + merchant. Everything else
+# waits until real users pull it out. (docs/LAUNCH_AUDIT.md)
+import os as _os
+LAUNCH_KEEP = {
+    "vibe_oracle",       # heuristic forecast on venue detail
+    "vibe_brief",        # daily city briefing
+    "night_planner",     # conversational concierge (lane-3 assistant)
+    "night_planner_btn",
+    "venue_spotlight",
+    "share_cards",
+    "top_scouts",
+    "vibe_match",
+}
+LAUNCH_MODE = _os.environ.get("LAUNCH_MODE", "0") == "1"
+
+
+def _apply_launch_mode(flags: Dict[str, bool]) -> Dict[str, bool]:
+    if not LAUNCH_MODE:
+        return flags
+    return {k: (v and k in LAUNCH_KEEP) for k, v in flags.items()}
+
 
 async def _get_flags_doc() -> dict:
     doc = await db.settings.find_one({"key": "feature_flags"})
@@ -54,8 +77,8 @@ async def _get_flags_doc() -> dict:
 @router.get("/feature-flags")
 async def get_feature_flags():
     """Public endpoint — returns current flag states. Called by app on startup."""
-    flags = await _get_flags_doc()
-    return {"flags": flags, "meta": FLAG_META}
+    flags = _apply_launch_mode(await _get_flags_doc())
+    return {"flags": flags, "meta": FLAG_META, "launch_mode": LAUNCH_MODE}
 
 
 class FlagUpdate(BaseModel):

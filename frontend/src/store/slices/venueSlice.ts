@@ -22,6 +22,7 @@ export interface VenueSlice {
   followedVenues: any[];
   livePushFeed: LivePush[];
   featureFlags: Record<string, boolean>;
+  launchMode: boolean;
   cityPickerOpen: boolean;
 
   // ── Actions ──────────────────────────────────────────────────────────────────
@@ -75,6 +76,7 @@ export const createVenueSlice: StateCreator<
   followedVenues: [],
   livePushFeed: [],
   featureFlags: {},
+  launchMode: false,
   cityPickerOpen: false,
 
   openCityPicker: () => set({ cityPickerOpen: true }),
@@ -300,7 +302,10 @@ export const createVenueSlice: StateCreator<
   fetchFeatureFlags: async () => {
     try {
       const res = await fetch(`${API_URL}/api/feature-flags`);
-      if (res.ok) set({ featureFlags: (await res.json()).flags || {} });
+      if (res.ok) {
+        const data = await res.json();
+        set({ featureFlags: data.flags || {}, launchMode: !!data.launch_mode });
+      }
     } catch { /* default: all enabled */ }
   },
 
