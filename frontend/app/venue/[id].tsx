@@ -52,7 +52,6 @@ import EmojiPulse from '../../src/components/EmojiPulse';
 import VenueInsiderPanel from '../../src/components/VenueInsiderPanel';
 import ScoutPressureChip from '../../src/components/ScoutPressureChip';
 import VibeMomentum from '../../src/components/VibeMomentum';
-import TorchButton from '../../src/components/TorchButton';
 import NarrativeDivider from '../../src/components/NarrativeDivider';
 import analytics, { EVENT } from '../../src/services/analytics';
 import { useDwellTracker } from '../../src/hooks/useDwellTracker';
@@ -1046,15 +1045,6 @@ const getVibeColor = (score: number, capacity = 'sparse') => {
                   </TouchableOpacity>
                 );
               })()}
-
-              {/* Torch */}
-              <View style={styles.contentPad}>
-                <TorchButton
-                  vibeScore={venue.current_vibe_score}
-                  venueId={venue.id}
-                  socket={socket}
-                />
-              </View>
 
               {/* Emoji Pulse */}
               <View style={styles.contentPad}>

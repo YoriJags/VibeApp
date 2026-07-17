@@ -121,7 +121,7 @@ export default function CartelPulse({ cartelName, members, onPress }: CartelPuls
         {/* Header */}
         <View style={s.header}>
           <View>
-            <Text style={s.brandLabel}>VIBEZ CARTEL</Text>
+            <Text style={s.brandLabel}>VIIBE CREW</Text>
             <Text style={s.cartelName} numberOfLines={1}>
               {cartelName}
             </Text>

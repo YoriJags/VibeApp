@@ -15,61 +15,14 @@ export interface SkinPreset {
   vibePlus?: boolean;       // if true, requires Vibe+
 }
 
+// Launch: one skin only — Heat, the brand thermal ramp. getSkinPreset falls
+// back to SKIN_PRESETS[0], so any legacy reactor_skin value resolves to Heat.
 export const SKIN_PRESETS: SkinPreset[] = [
-  {
-    key:     'default',
-    name:    'Default',
-    preview: '#1155EE',
-    palette: ['#1A1040', '#1155EE', '#8800EE', '#FF6600', '#FF0044'],
-  },
   {
     key:     'heat',
     name:    'Heat',
     preview: '#FF4D00',
     palette: ['#241C16', '#7A2E00', '#E85D00', '#FFB300', '#FFF3D6'],
-  },
-  {
-    key:     'gold',
-    name:    'Gold',
-    preview: '#FFD700',
-    palette: ['#1C1400', '#7A5800', '#C49200', '#FFD700', '#FFF4A0'],
-  },
-  {
-    key:     'emerald',
-    name:    'Emerald',
-    preview: '#00E676',
-    palette: ['#001A0C', '#005C30', '#00A055', '#00E676', '#A8FFD8'],
-  },
-  {
-    key:     'arctic',
-    name:    'Arctic',
-    preview: '#00C8FF',
-    palette: ['#001828', '#004E80', '#0092CC', '#00C8FF', '#AAEEFF'],
-  },
-  {
-    key:     'rose',
-    name:    'Rose',
-    preview: '#FF0088',
-    palette: ['#1A0010', '#6A003A', '#C00068', '#FF0088', '#FFB0DC'],
-  },
-  {
-    key:     'void',
-    name:    'Void',
-    preview: '#9B59B6',
-    palette: ['#06030E', '#1C0A3A', '#4A1680', '#9B59B6', '#D8A8FF'],
-  },
-  {
-    key:     'inferno',
-    name:    'Inferno',
-    preview: '#FF6D00',
-    palette: ['#1A0800', '#7A2E00', '#CC5500', '#FF6D00', '#FFD4A0'],
-  },
-  {
-    key:     'custom',
-    name:    'Custom',
-    preview: '#FFFFFF',
-    palette: ['#111111', '#333333', '#666666', '#AAAAAA', '#FFFFFF'],
-    vibePlus: true,
   },
 ];
 

@@ -27,11 +27,9 @@ import AvatarDisplay from '../../src/components/AvatarDisplay';
 import AchievementBadge, { Badge } from '../../src/components/AchievementBadge';
 import CrewCard from '../../src/components/CrewCard';
 import AuraLevelUp from '../../src/components/AuraLevelUp';
-import SkinPicker from '../../src/components/SkinPicker';
 import ZodiacPicker from '../../src/components/ZodiacPicker';
 import NarrativeDivider from '../../src/components/NarrativeDivider';
 import analytics, { EVENT } from '../../src/services/analytics';
-import { getSkinPreset, resolveSkinPalette } from '../../src/config/skins';
 import { getZodiacSign } from '../../src/config/zodiac';
 import { DEMO_BADGES, DEMO_CREW } from '../../src/data/demoData';
 
@@ -93,8 +91,6 @@ export default function ProfileScreen() {
   const [showAvatarBuilder, setShowAvatarBuilder] = useState(false);
   const [showPassport, setShowPassport] = useState(false);
   const [showAfterParty, setShowAfterParty] = useState(false);
-  const [showSkinPicker, setShowSkinPicker] = useState(false);
-  const [savingSkin, setSavingSkin] = useState(false);
   const [showZodiacPicker, setShowZodiacPicker] = useState(false);
   const [showAuraLevelUp, setShowAuraLevelUp] = useState(false);
   const [showNightSummary, setShowNightSummary] = useState(false);
@@ -227,27 +223,6 @@ export default function ProfileScreen() {
     );
   };
 
-  const handleSkinSelect = async (skinKey: string) => {
-    if (!user) return;
-    setSavingSkin(true);
-    try {
-      await fetch(`${API_URL}/api/users/me/reactor-skin`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json', ...useVibeStore.getState().getAuthHeaders() },
-        body: JSON.stringify({ skin: skinKey }),
-      });
-      // Update local user object immediately
-      useVibeStore.setState(s => ({
-        user: s.user ? { ...s.user, reactor_skin: skinKey } : s.user,
-      }));
-      analytics.track(EVENT.SKIN_CHANGED, { skin: skinKey });
-    } catch {
-      Alert.alert('Error', 'Could not save skin. Try again.');
-    } finally {
-      setSavingSkin(false);
-      setShowSkinPicker(false);
-    }
-  };
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -699,7 +674,7 @@ export default function ProfileScreen() {
           activeOpacity={0.8}
         >
           <Ionicons name="book-outline" size={14} color="#3399FF" />
-          <Text style={styles.replayTutorialText}>How to Use Viibez</Text>
+          <Text style={styles.replayTutorialText}>How to Use VIIBE</Text>
         </TouchableOpacity>
 
         {/* Demo: trigger AuraLevelUp ceremony */}
@@ -829,52 +804,6 @@ export default function ProfileScreen() {
 
         <NarrativeDivider mode="chapter" label="YOUR SIGNATURE" color="#FFD700" topGap={8} botGap={4} />
 
-        {/* ── Reactor Skin ── */}
-        <View style={styles.skinSection}>
-          <View style={styles.skinSectionHeader}>
-            <View>
-              <Text style={styles.skinSectionTitle}>REACTOR SKIN</Text>
-              <Text style={styles.skinSectionSub}>Personalise your energy signature</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.skinChangeBtn}
-              onPress={() => setShowSkinPicker(true)}
-              activeOpacity={0.8}
-            >
-              <Text style={styles.skinChangeBtnText}>{savingSkin ? 'SAVING…' : 'CHANGE'}</Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Current skin preview */}
-          {(() => {
-            const sk  = user?.reactor_skin ?? 'default';
-            const pal = resolveSkinPalette(sk);
-            const preset = getSkinPreset(sk.startsWith('custom:') ? 'custom' : sk);
-            return (
-              <TouchableOpacity
-                style={styles.skinPreviewCard}
-                onPress={() => setShowSkinPicker(true)}
-                activeOpacity={0.82}
-              >
-                <View style={styles.skinPaletteRow}>
-                  {pal.map((col, i) => (
-                    <View key={i} style={[styles.skinPaletteBlock, { backgroundColor: col }]} />
-                  ))}
-                </View>
-                <View style={styles.skinPreviewInfo}>
-                  <View style={[styles.skinDot, { backgroundColor: pal[3] }]} />
-                  <Text style={[styles.skinPreviewName, { color: pal[3] }]}>
-                    {preset.name.toUpperCase()}
-                  </Text>
-                  {sk.startsWith('custom:') && (
-                    <Text style={styles.skinPreviewHex}>{sk.slice(7)}</Text>
-                  )}
-                </View>
-              </TouchableOpacity>
-            );
-          })()}
-        </View>
-
         <View style={{ height: 100 }} />
       </ScrollView>
 
@@ -889,14 +818,6 @@ export default function ProfileScreen() {
         visible={showVibePlus}
         onClose={() => setShowVibePlus(false)}
         onSuccess={() => setShowVibePlus(false)}
-      />
-
-      <SkinPicker
-        visible={showSkinPicker}
-        currentSkin={user?.reactor_skin}
-        isVibePlus={isVibePlus()}
-        onSelect={handleSkinSelect}
-        onClose={() => setShowSkinPicker(false)}
       />
 
       <ZodiacPicker
