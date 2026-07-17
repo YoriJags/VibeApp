@@ -67,7 +67,32 @@
           "locationAlwaysAndWhenInUsePermission": "Allow Viibe to use your location to verify vibe checks"
         }
       ],
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "react-native-android-widget",
+        {
+          "widgets": [
+            {
+              "name": "CityPulse",
+              "label": "VIIBE City Pulse",
+              "description": "Live Lagos energy on your home screen",
+              "minWidth": "110dp",
+              "minHeight": "110dp",
+              "targetCellWidth": 2,
+              "targetCellHeight": 2,
+              "updatePeriodMillis": 1800000,
+              "resizeMode": "horizontal|vertical"
+            }
+          ]
+        }
+      ],
+      [
+        "expo-quick-actions",
+        {
+          "androidIcons": {},
+          "iosActions": []
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
