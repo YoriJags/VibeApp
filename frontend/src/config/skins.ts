@@ -23,6 +23,12 @@ export const SKIN_PRESETS: SkinPreset[] = [
     palette: ['#1A1040', '#1155EE', '#8800EE', '#FF6600', '#FF0044'],
   },
   {
+    key:     'heat',
+    name:    'Heat',
+    preview: '#FF4D00',
+    palette: ['#241C16', '#7A2E00', '#E85D00', '#FFB300', '#FFF3D6'],
+  },
+  {
     key:     'gold',
     name:    'Gold',
     preview: '#FFD700',
