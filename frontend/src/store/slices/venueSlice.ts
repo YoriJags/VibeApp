@@ -5,6 +5,18 @@ import {
 } from '../types';
 import type { VibeStore } from '../vibeStore';
 
+// Launch build keeps only these features on; mirrors backend LAUNCH_KEEP.
+const LAUNCH_KEEP = new Set([
+  'vibe_oracle', 'vibe_brief', 'night_planner', 'night_planner_btn',
+  'venue_spotlight', 'share_cards', 'top_scouts', 'vibe_match',
+]);
+function filterLaunchFlags(flags: Record<string, boolean>): Record<string, boolean> {
+  const out: Record<string, boolean> = {};
+  for (const k of Object.keys(flags)) out[k] = flags[k] && LAUNCH_KEEP.has(k);
+  return out;
+}
+
+
 const API_URL = process.env.EXPO_PUBLIC_BACKEND_URL || '';
 
 export interface VenueSlice {
@@ -76,7 +88,7 @@ export const createVenueSlice: StateCreator<
   followedVenues: [],
   livePushFeed: [],
   featureFlags: {},
-  launchMode: false,
+  launchMode: process.env.EXPO_PUBLIC_LAUNCH_MODE === '1',
   cityPickerOpen: false,
 
   openCityPicker: () => set({ cityPickerOpen: true }),
@@ -304,7 +316,10 @@ export const createVenueSlice: StateCreator<
       const res = await fetch(`${API_URL}/api/feature-flags`);
       if (res.ok) {
         const data = await res.json();
-        set({ featureFlags: data.flags || {}, launchMode: !!data.launch_mode });
+        const launchMode = process.env.EXPO_PUBLIC_LAUNCH_MODE === '1' || !!data.launch_mode;
+        // Launch build shows only the launch keep-set regardless of backend flags.
+        const flags = launchMode ? filterLaunchFlags(data.flags || {}) : (data.flags || {});
+        set({ featureFlags: flags, launchMode });
       }
     } catch { /* default: all enabled */ }
   },

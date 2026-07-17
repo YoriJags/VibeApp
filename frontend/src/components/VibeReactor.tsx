@@ -460,11 +460,7 @@ export default function VibeReactor({
   const activeSurge    = useVibeStore(s => s.activeSurge);
 
   // ── Skin palette — shared value so color transitions are smooth ──────────────
-  const activeSkin     = skinKey ?? user?.reactor_skin;
-  const skinPalette    = useSharedValue<string[]>(resolveSkinPalette(activeSkin));
-  useEffect(() => {
-    skinPalette.value = resolveSkinPalette(activeSkin);
-  }, [activeSkin]);
+  const skinPalette    = useSharedValue<string[]>(resolveSkinPalette());
 
   // ── Coherence system ─────────────────────────────────────────────────────────
   const { syncPct, isCoherent, recordTap, recordVariance } = useKineticBuffer();

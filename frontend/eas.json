@@ -27,6 +27,17 @@
         "EXPO_PUBLIC_BACKEND_URL": "https://vibeapp-production-1835.up.railway.app"
       }
     },
+    "launch-android": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "environment": "preview",
+      "env": {
+        "EXPO_PUBLIC_BACKEND_URL": "https://vibeapp-production-1835.up.railway.app",
+        "EXPO_PUBLIC_LAUNCH_MODE": "1"
+      }
+    },
     "production": {
       "autoIncrement": true
     }
