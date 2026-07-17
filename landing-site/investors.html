@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIIBE — Investor Brief</title>
+<meta name="description" content="A decentralized sensor network for live human energy. Lagos nightlife is market one.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --coal: #0B0908; --ash: #16110D; --soot: #292019;
+  --bone: #F4EFE6; --smoke: #A89B8C;
+  --ember: #FF4D00; --amber: #FFB300; --whitehot: #FFF3D6;
+  --ramp: linear-gradient(90deg, #241C16 0%, #7A2E00 30%, #E85D00 58%, #FFB300 84%, #FFF3D6 100%);
+}
+body {
+  background: var(--coal); color: var(--bone);
+  font-family: 'Archivo', sans-serif; font-size: 16px; line-height: 1.75;
+}
+::selection { background: var(--ember); color: var(--coal); }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+main { max-width: 880px; margin: 0 auto; padding: 70px 5vw 90px; }
+.wordmark { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 15px; letter-spacing: .32em; margin-bottom: 60px; }
+.wordmark em { font-style: normal; color: var(--ember); }
+.eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: .3em; color: var(--ember); margin: 64px 0 14px; }
+.eyebrow:first-of-type { margin-top: 0; }
+h1 { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: clamp(28px, 4.6vw, 46px); line-height: 1.14; margin-bottom: 20px; }
+h1 .hot { color: transparent; background: var(--ramp); -webkit-background-clip: text; background-clip: text; }
+h2 { font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 21px; margin-bottom: 14px; }
+p { color: var(--smoke); margin-bottom: 16px; max-width: 62ch; }
+p b, li b { color: var(--bone); font-weight: 600; }
+ul { list-style: none; margin-bottom: 16px; }
+li { color: var(--smoke); padding-left: 22px; position: relative; margin-bottom: 10px; }
+li::before { content: '—'; position: absolute; left: 0; color: var(--ember); }
+.strata { height: 3px; background: var(--ramp); border-radius: 2px; margin: 56px 0; }
+.panel { background: var(--ash); border: 1px solid var(--soot); border-radius: 10px; padding: 26px 28px; margin: 26px 0; }
+.panel .ph { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .2em; color: var(--smoke); margin-bottom: 16px; }
+#pulse-row { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+#pulse-score { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 52px; line-height: 1; }
+#pulse-label { font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: .3em; color: var(--amber); }
+#pulse-meta { font-size: 13px; color: var(--smoke); }
+#pulse-meta b { color: var(--bone); }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+.cell { background: var(--ash); border: 1px solid var(--soot); border-radius: 10px; padding: 22px 24px; }
+.cell .t { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .22em; color: var(--amber); margin-bottom: 10px; }
+.cell p { font-size: 14px; margin: 0; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--soot); color: var(--smoke); }
+th { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .18em; color: var(--bone); }
+td b { color: var(--bone); }
+.creed { font-family: 'Unbounded', sans-serif; font-size: 19px; line-height: 1.5; margin: 10px 0 6px; }
+.creed b { font-weight: 800; color: transparent; background: var(--ramp); -webkit-background-clip: text; background-clip: text; }
+.btn { display: inline-block; background: var(--ember); color: var(--coal); text-decoration: none; font-weight: 600; padding: 14px 32px; border-radius: 5px; margin-top: 10px; }
+.btn:hover { background: var(--amber); }
+a.inline { color: var(--amber); text-decoration: none; border-bottom: 1px solid var(--soot); }
+footer { max-width: 880px; margin: 0 auto; padding: 0 5vw 50px; font-size: 12px; color: #55493C; font-family: 'IBM Plex Mono', monospace; letter-spacing: .2em; }
+</style>
+</head>
+<body>
+<main>
+  <div class="wordmark">VII<em>B</em>E — INVESTOR BRIEF</div>
+
+  <h1>A decentralized sensor network for <span class="hot">live human energy.</span></h1>
+  <p><b>Wherever people gather, there is energy — and nobody measures it.</b> Google's live-busyness barely covers Lagos; Instagram tells you about last night. VIIBE reads what a room feels like <b>right now</b>, from people verifiably in it, and sells the truth to the venues and machines that need it.</p>
+
+  <div class="eyebrow">EXHIBIT A — THIS NUMBER IS LIVE</div>
+  <div class="panel">
+    <div class="ph"><span>CITY INSTRUMENT — LAGOS</span><span id="inst-time">CONNECTING…</span></div>
+    <div id="pulse-row">
+      <span id="pulse-score" class="mono">—</span>
+      <span id="pulse-label">READING</span>
+      <span id="pulse-meta"></span>
+    </div>
+  </div>
+  <p style="font-size:13px;" class="mono">Not a mockup. This brief reads the production API on load — the same feed the app, the venue screens, and the agent API consume. If Lagos is quiet right now, it says so.</p>
+
+  <div class="strata"></div>
+
+  <div class="eyebrow">THE MARKET STRUCTURE</div>
+  <h2>An intel market, not a listings app</h2>
+  <ul>
+    <li><b>Scouts</b> (supply) submit geofenced 3-second vibe checks; every signal carries a credibility weight earned by track record. Scouts stake reputation on predictions and earn on accuracy.</li>
+    <li><b>Venues</b> (first buyers) pay for the truth about their own rooms: live watcher counts, verified-arrival attribution, and a weekly Lift Report that prices their promo spend in naira.</li>
+    <li><b>Agents & partners</b> (the endgame) buy the aggregate feed. VIIBE is built to be the source AI agents query for "where is alive right now" — before that category has an incumbent.</li>
+  </ul>
+
+  <div class="eyebrow">WHY THE SIGNAL IS DEFENSIBLE</div>
+  <div class="grid2">
+    <div class="cell"><div class="t">DECAY-HONEST</div><p>Readings expire in minutes, like the energy itself. A quiet map is allowed to look quiet — trust is the moat.</p></div>
+    <div class="cell"><div class="t">PRESENCE-VERIFIED</div><p>Ratings and reactor charges are geofence-checked. Remote hype is damped 5x and can never drive peak status.</p></div>
+    <div class="cell"><div class="t">CORROBORATION-GATED</div><p>ELECTRIC — the level that fires city-wide alerts — requires 5+ verified-present scouts, a hot vibe check, and a 10-minute sustained hold. It cannot be faked by a group chat.</p></div>
+    <div class="cell"><div class="t">SCENE-AGNOSTIC</div><p>Rating taxonomies and the decay engine don't know what a nightclub is. Concerts, festivals, street events are configuration, not rebuilds.</p></div>
+  </div>
+
+  <div class="eyebrow">WHY NIGHTLIFE, WHY LAGOS</div>
+  <p>Every horizontal platform won a vertical first. Nightlife is the beachhead because its energy decays fastest (minutes — where live intel is worth the most), a paying buyer exists tonight (venues spend heavily on promotion with zero attribution), and it's where the scout habit forms. Lagos is one of the world's great nightlife cities with the weakest incumbent data coverage.</p>
+
+  <div class="eyebrow">THE PROOF PLAN — RUNNING NOW</div>
+  <h2>Four Fridays, one corridor, falsifiable</h2>
+  <p>We don't ask anyone to imagine adoption. The rollout is a four-weekend experiment in the Lekki/VI corridor, Fridays 9pm–3am: <b>30 paid founding scouts, 10+ venues, a Big Screen on an anchor venue's wall, 2 merchant pilots receiving Lift Reports.</b> The metric on the wall is <b>repeat scout rate</b> — do this weekend's scouts come back next weekend. Every number lands on this page as it happens.</p>
+  <table>
+    <tr><th>CORRIDOR EVIDENCE</th><th>STATUS</th></tr>
+    <tr><td>Consecutive live Fridays</td><td class="mono" id="ev-1"><b>launching</b></td></tr>
+    <tr><td>Founding scouts active / returning</td><td class="mono" id="ev-2"><b>recruiting</b></td></tr>
+    <tr><td>Venues with merchant access requested</td><td class="mono" id="ev-3"><b>—</b></td></tr>
+    <tr><td>Paying merchants</td><td class="mono" id="ev-4"><b>—</b></td></tr>
+  </table>
+  <p style="font-size:13px;" class="mono">Updated weekly during the corridor run. Blank cells stay blank until they're true.</p>
+
+  <div class="eyebrow">WHAT EXISTS TODAY</div>
+  <ul>
+    <li><b>Shipped product</b>: Android app (map, vibe checks, reactor), venue Big Screen projection mode, merchant dashboard with live watcher counts, attribution + Lift Report engine, agent-distribution API. All live in production.</li>
+    <li><b>Revenue design that doesn't wait for scale</b>: merchant analytics monetize with a handful of scouts and one paying venue — liquidity risk is decoupled from revenue risk.</li>
+    <li><b>Lean structure</b>: founder-funded runway, near-zero burn, the entire stack on commodity infra.</li>
+  </ul>
+
+  <div class="strata"></div>
+
+  <p class="creed">We would rather show you <b>nothing</b> than lie to you.</p>
+  <p style="font-size:13px;" class="mono">THE SIGNAL CREED — it applies to this page too.</p>
+
+  <div class="eyebrow">CONTACT</div>
+  <p><b>Oluyori Ajagun</b>, founder. Live demo of the map, a venue Big Screen, and the corridor plan on a call.</p>
+  <a class="btn" href="mailto:yoriajagun08@gmail.com?subject=VIIBE%20investor%20conversation">Start the conversation</a>
+</main>
+<footer>VIIBE · LIVE HUMAN ENERGY · LAGOS · <a class="inline" href="/">PUBLIC SITE</a></footer>
+
+<script>
+(async () => {
+  try {
+    const p = await fetch('/api/city-pulse/lagos').then(r => r.json());
+    document.getElementById('pulse-score').textContent = Math.round(p.pulse_score);
+    document.getElementById('pulse-label').textContent = p.pulse_label || 'QUIET';
+    const meta = [];
+    if (p.trending_venue) meta.push(`<b>${p.trending_venue.name}</b> leading`);
+    if (p.active_scouts) meta.push(`<b>${p.active_scouts}</b> scouts live`);
+    if (p.live_venues) meta.push(`<b>${p.live_venues}</b> venues reporting`);
+    document.getElementById('pulse-meta').innerHTML = meta.join(' &middot; ');
+    document.getElementById('inst-time').textContent =
+      'LIVE · ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  } catch {
+    document.getElementById('inst-time').textContent = 'SIGNAL LOST';
+  }
+})();
+</script>
+</body>
+</html>

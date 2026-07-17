@@ -61,6 +61,39 @@ Two mechanics that make venues *want* the intel market on their walls:
 
 ---
 
+## Rollout — The Friday Corridor (the path to an acquirer)
+
+**Goal: an investor buys this. Investors buy evidence, not apps.** The four
+weekends below ARE the pitch — every checkbox produces a number that goes on
+the investor page. Code freeze outside these items.
+
+### R0 — Compress (before first Friday)
+- [ ] Launch surface = five things ONLY: map, vibe check, reactor, Big Screen, merchant lift report
+- [ ] Everything else dark-flagged (not deleted — dark): crews, battles, cosmic, zodiac, coins, bookings, quests, DNA
+- [ ] Launch window declared publicly: **Fridays 9pm–3am, Lekki/VI only**
+
+### R1 — Bodies (week 1)
+- [ ] Recruit 30 founding scouts (pay ₦5k/night — sensors are cheap, data is not)
+- [ ] Founding-scout WhatsApp group live; founder is concierge
+- [ ] 1 promoter partner signed (distribution + venue doors; candidate co-founder)
+
+### R2 — Walls (weeks 1–2)
+- [ ] Big Screen glowing in 1 anchor venue on a Friday
+- [ ] 5 venue managers shown their own live screen + watcher count, in person
+- [ ] 2 pilot merchants active (free), receiving Monday Lift Reports
+
+### R3 — Evidence (weeks 2–4)
+- [ ] **Repeat scout rate** tracked weekly — THE metric; on the founder's wall
+- [ ] 4 consecutive Fridays of live corridor data banked
+- [ ] 1 merchant converts pilot → paid (any amount; the receipt is the proof)
+- [ ] Investor page updated weekly with real corridor numbers
+
+### R4 — The ask (after weekend 4)
+- [ ] Investor one-pager sent with live links: landing, instrument, Big Screen, lift report sample
+- [ ] The pitch: *"Four weekends. X scouts returned weekly. Y venues asked to pay. This is the live-energy layer at N=1 corridor — priced before we scale it."*
+
+---
+
 ## Wealth Organs (the spine) — what actually makes money
 
 The product doctrine that makes VIIBE the *best* version of itself, not just a
