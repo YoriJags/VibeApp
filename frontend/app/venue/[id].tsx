@@ -49,7 +49,6 @@ import SurgeCelebration from '../../src/components/SurgeCelebration';
 import FirstScoutCelebration from '../../src/components/FirstScoutCelebration';
 import ResonancePrompt from '../../src/components/ResonancePrompt';
 import EmojiPulse from '../../src/components/EmojiPulse';
-import TorchButton from '../../src/components/TorchButton';
 import VenueInsiderPanel from '../../src/components/VenueInsiderPanel';
 import ScoutPressureChip from '../../src/components/ScoutPressureChip';
 import VibeMomentum from '../../src/components/VibeMomentum';
@@ -75,7 +74,6 @@ export default function VenueDetailScreen() {
   const { id, openRateModal } = useLocalSearchParams<{ id: string; openRateModal?: string }>();
   const router = useRouter();
   const vibePersona = useVibeStore(s => s.vibePersona);
-  const launchMode = useVibeStore(s => s.launchMode);
 
   const {
     fetchVenue,
@@ -1047,17 +1045,6 @@ const getVibeColor = (score: number, capacity = 'sparse') => {
                   </TouchableOpacity>
                 );
               })()}
-
-              {/* Torch — full build only */}
-              {!launchMode && (
-                <View style={styles.contentPad}>
-                  <TorchButton
-                    vibeScore={venue.current_vibe_score}
-                    venueId={venue.id}
-                    socket={socket}
-                  />
-                </View>
-              )}
 
               {/* Emoji Pulse */}
               <View style={styles.contentPad}>
