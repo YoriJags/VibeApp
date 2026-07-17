@@ -32,7 +32,7 @@ account action — cannot be done from the repo.)
 
 ## Lane 2 — OS assistants launch VIIBE
 
-- **Android (in this build)**: `expo-quick-actions` launcher shortcuts
+  **Android (in this build)**: home-screen City Pulse widget (react-native-android-widget, src/widgets/) — live Lagos energy on the phone wall, refreshes every 30 min, taps open the app. (Launcher shortcuts pending a compatible expo-quick-actions release.)
   ("Where's alive now" / "Drop a vibe check") and the
   **City Pulse home-screen widget** (`react-native-android-widget`,
   `src/widgets/`) — live Lagos energy on the phone wall, refreshes every

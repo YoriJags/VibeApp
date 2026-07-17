@@ -5,7 +5,6 @@ import { View, StyleSheet } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as SplashScreen from 'expo-splash-screen';
-import * as QuickActions from 'expo-quick-actions';
 import { useVibeStore } from '../src/store/vibeStore';
 import OnboardingFlow from '../src/components/OnboardingFlow';
 import AppTutorial from '../src/components/AppTutorial';
@@ -94,14 +93,6 @@ function AppInitializer({ children }: { children: React.ReactNode }) {
 }
 
 export default function RootLayout() {
-  // Google Assistant / launcher long-press shortcuts
-  useEffect(() => {
-    QuickActions.setItems([
-      { id: 'map', title: "Where's alive now", subtitle: 'Open the live map', params: { href: '/' } },
-      { id: 'rate', title: 'Drop a vibe check', subtitle: 'Rate the room you are in', params: { href: '/' } },
-    ]).catch(() => {});
-  }, []);
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
     <ErrorBoundary variant="screen" label="App">
