@@ -5,6 +5,7 @@ Assembles FastAPI app from modular route, service, and config modules.
 import os
 from fastapi import FastAPI, APIRouter
 from starlette.middleware.cors import CORSMiddleware
+import asyncio
 import socketio
 
 from app.config import sio, logger, ensure_indexes
@@ -216,6 +217,10 @@ app.add_middleware(
 async def startup():
     await ensure_indexes()
     logger.info("Viibe App API started - indexes ensured")
+    # Cold-start liveliness: ambient demo energy, organic-deferring (DEMO_AMBIENT=1)
+    from app.services.ambient_demo import ambient_enabled, ambient_loop
+    if ambient_enabled():
+        asyncio.create_task(ambient_loop())
 
 # ===== Socket.IO ASGI App =====
 socket_app = socketio.ASGIApp(sio, app)

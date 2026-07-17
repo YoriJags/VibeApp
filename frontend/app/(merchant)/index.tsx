@@ -19,6 +19,7 @@ import {
   TextInput,
   Switch,
   Alert,
+  Linking,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -459,6 +460,31 @@ export default function MerchantDashboard() {
             <Text style={styles.walletBalance}>{'\u20A6'}{(stats?.wallet_balance || 0).toLocaleString()}</Text>
           </LinearGradient>
         </LinearGradient>
+
+        {/* ====== BIG SCREEN (projection mode) ====== */}
+        <View style={styles.section}>
+          <TouchableOpacity
+            activeOpacity={0.85}
+            onPress={() => {
+              const vid = stats?.venue?.id || user?.merchant_venue_id;
+              if (vid) Linking.openURL(`${API_URL}/screen/${vid}`);
+            }}
+            style={{
+              flexDirection: 'row', alignItems: 'center', gap: 14,
+              backgroundColor: '#16110D', borderWidth: 1, borderColor: '#292019',
+              borderRadius: 14, padding: 18,
+            }}
+          >
+            <Ionicons name="tv" size={26} color="#FF4D00" />
+            <View style={{ flex: 1 }}>
+              <Text style={{ color: '#F4EFE6', fontSize: 16, fontWeight: '700' }}>Project your Big Screen</Text>
+              <Text style={{ color: '#A89B8C', fontSize: 12, marginTop: 3 }}>
+                Put your live reactor on the wall — the crowd rallies it toward ELECTRIC.
+              </Text>
+            </View>
+            <Ionicons name="open-outline" size={20} color="#A89B8C" />
+          </TouchableOpacity>
+        </View>
 
         {/* ====== LIVE PERFORMANCE METRICS ====== */}
         <View style={styles.section}>
