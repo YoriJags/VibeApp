@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VIIBE — Big Screen</title>
+<title>VIIBE Big Screen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -72,6 +72,17 @@
   .stat .l { font-size: 1.7vh; color: var(--smoke); letter-spacing: .2em; margin-top: .7vh; }
   .stat.watch .n { color: var(--amber); text-shadow: 0 0 3vh rgba(255,179,0,.35); }
   .stat.strata .n { color: var(--lvl); }
+  /* the chase: who is above us and how far */
+  #chase {
+    display: none; align-items: center; gap: 1.6vw;
+    background: var(--ash); border: 1px solid var(--soot); border-radius: 1.6vh;
+    padding: 1.6vh 3vw; font-size: 2.4vh; letter-spacing: .12em; color: var(--smoke);
+  }
+  #chase.on { display: flex; }
+  #chase b { color: var(--whitehot); font-weight: 500; }
+  #chase .gap { color: var(--ember); font-weight: 500; }
+  #chase.leading { border-color: var(--amber); }
+  #chase.leading b, #chase.leading .gap { color: var(--amber); }
   #err { color: var(--ember); font-size: 2.2vh; display: none; letter-spacing: .15em; }
   #foot { position: absolute; bottom: 2.4vh; font-size: 1.7vh; color: #55493C; letter-spacing: .3em; }
   @media (prefers-reduced-motion: reduce) { #level.electric { animation: none; } }
@@ -80,18 +91,19 @@
 <body>
   <div id="glow"></div>
   <div id="brand">V I I <em>B</em> E</div>
-  <div id="venue">—</div>
+  <div id="venue">&middot;&middot;</div>
   <div id="level">DORMANT</div>
   <div id="bar-wrap">
     <div id="bar-track"><div id="bar-fill"></div></div>
-    <div id="next"><span class="cmd">TAP THE REACTOR</span> — CHARGE THE ROOM</div>
+    <div id="next"><span class="cmd">TAP THE REACTOR</span> &middot; CHARGE THE ROOM</div>
   </div>
   <div id="stats">
     <div class="stat"><div class="n" id="scouts">0</div><div class="l">SCOUTS IN THE ROOM</div></div>
     <div class="stat watch"><div class="n" id="watchers">0</div><div class="l">WATCHING ACROSS LAGOS</div></div>
-    <div class="stat strata"><div class="n" id="strata-n">—</div><div class="l">CITY ENERGY STRATA</div></div>
+    <div class="stat strata"><div class="n" id="strata-n">&middot;&middot;</div><div class="l">CITY ENERGY STRATA</div></div>
   </div>
-  <div id="err">SIGNAL LOST — RETRYING…</div>
+  <div id="chase"></div>
+  <div id="err">SIGNAL LOST &middot; RETRYING</div>
   <div id="foot">LIVE HUMAN ENERGY · VERIFIED BY SCOUTS · NEVER FAKED</div>
 
 <script>
@@ -118,8 +130,8 @@ async function tick() {
       j(`/api/venues`),
     ]);
 
-    $("venue").textContent = venue.name || "—";
-    document.title = `VIIBE — ${venue.name}`;
+    $("venue").textContent = venue.name || "";
+    document.title = `VIIBE · ${venue.name}`;
 
     const lvl = $("level");
     lvl.textContent = surge.level_label || "DORMANT";
@@ -129,8 +141,8 @@ async function tick() {
 
     $("bar-fill").style.width = Math.round((surge.charge_pct || 0) * 100) + "%";
     $("next").innerHTML = surge.next_level
-      ? `<b>${surge.taps_to_next}</b> CHARGES TO <b>${surge.next_level}</b> — <span class="cmd">TAP THE REACTOR</span>`
-      : `MAX CHARGE — <span class="cmd">THE ROOM IS THE SIGNAL</span>`;
+      ? `<b>${surge.taps_to_next}</b> CHARGES TO <b>${surge.next_level}</b> · <span class="cmd">TAP THE REACTOR</span>`
+      : `MAX CHARGE · <span class="cmd">THE ROOM IS THE SIGNAL</span>`;
 
     $("scouts").textContent = orbit.watching_present + (surge.checkin_count || 0);
     $("watchers").textContent = orbit.watching_remote;
@@ -139,7 +151,24 @@ async function tick() {
       .filter(v => (v.city || "") === (venue.city || ""))
       .sort((a, b) => (b.current_vibe_score || 0) - (a.current_vibe_score || 0));
     const rank = ranked.findIndex(v => v.id === venueId) + 1;
-    $("strata-n").textContent = rank > 0 ? ordinal(rank) : "—";
+    $("strata-n").textContent = rank > 0 ? ordinal(rank) : "";
+
+    // ── The chase: the venue directly above, and the gap to close ──────────
+    const chase = $("chase");
+    const me = ranked[rank - 1];
+    if (rank === 1 && me) {
+      chase.className = "on leading";
+      chase.innerHTML = "♛ <b>#1 IN LAGOS RIGHT NOW</b> · HOLD IT";
+    } else if (rank > 1 && me) {
+      const above = ranked[rank - 2];
+      const gap = Math.max(0.1, (above.current_vibe_score || 0) - (me.current_vibe_score || 0));
+      chase.className = "on";
+      chase.innerHTML =
+        "<span class='gap'>" + gap.toFixed(1) + " POINTS</span> BEHIND <b>" +
+        (above.name || "").toUpperCase() + "</b> FOR " + ordinal(rank - 1);
+    } else {
+      chase.className = "";
+    }
 
     $("err").style.display = "none";
   } catch (e) {

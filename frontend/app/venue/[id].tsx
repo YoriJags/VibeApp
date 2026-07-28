@@ -40,6 +40,7 @@ import VenueRoastCard from '../../src/components/VenueRoastCard';
 import VibePlusModal from '../../src/components/VibePlusModal';
 import VenueAlertModal, { VenueAlert } from '../../src/components/VenueAlertModal';
 import EnergyMeter from '../../src/components/EnergyMeter';
+import { PeakCountdown, FreshnessCountdown } from '../../src/components/VenueTimers';
 import VenueIntentBar from '../../src/components/VenueIntentBar';
 import ArrivalIntelCard from '../../src/components/ArrivalIntelCard';
 import CrowdCompositionBar from '../../src/components/CrowdCompositionBar';
@@ -984,6 +985,14 @@ const getVibeColor = (score: number, capacity = 'sparse') => {
                         </View>
                       );
                     })()}
+
+                    {/* Reading expiry countdown: decay honesty, made visible */}
+                    <FreshnessCountdown lastRatedMinsAgo={venue.last_rated_mins_ago} />
+
+                    {/* Peak countdown: when should I actually be here */}
+                    <View style={{ marginTop: 12 }}>
+                      <PeakCountdown forecast={(venue as any).peak_forecast} />
+                    </View>
 
                     {/* AI-04: Comparative framing */}
                     {comparative && comparative.label !== 'no_history' && comparative.framing && (

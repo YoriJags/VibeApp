@@ -220,6 +220,12 @@ async def get_venue(venue_id: str, authorization: str = Header(default="")):
     if is_open is False:
         venue["next_open"] = next_open_label(venue)
 
+    # "Peaks in ~40 min" — from this venue's own history; None when unknown
+    from app.services.peak_forecast import compute_peak_forecast
+    venue["peak_forecast"] = await compute_peak_forecast(
+        venue_id, venue.get("current_vibe_score", 0)
+    )
+
     return venue
 
 
