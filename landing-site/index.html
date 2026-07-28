@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIIBE — See what's popping right now</title>
-<meta name="description" content="A live map that shows you what's popping right now — clubs, lounges, concerts, wherever people gather — based on the people who are actually there. Lagos, in real time.">
+<title>VIIBE · See what's popping right now</title>
+<meta name="description" content="A live map that shows you what's popping right now. Clubs, lounges, concerts, wherever people gather, based on the people who are actually there. Lagos, in real time.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -109,6 +109,68 @@ h1 { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: clamp(33
 .map-card .mc-fill { height: 100%; width: 82%; background: var(--ramp); border-radius: 3px; }
 .map-card .mc-sub { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; color: var(--smoke); margin-top: 7px; letter-spacing: .1em; }
 
+/* ── Walkthrough: three painted screens ── */
+.map.plain { background: #0A0906; }
+.map.plain::before { display: none; }
+#walk { background: linear-gradient(180deg, transparent, rgba(255,77,0,.03) 45%, transparent); }
+.screens { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; align-items: start; }
+@media (max-width: 900px) { .screens { grid-template-columns: 1fr; gap: 54px; max-width: 340px; margin: 0 auto; } }
+.screen-col { text-align: center; }
+.screen-col .phone { margin: 0 auto 22px; width: 268px; }
+@media (max-width: 900px) { .screen-col .phone { width: 280px; } }
+.screen-col:nth-child(2) .phone { transform: translateY(-18px); }
+@media (max-width: 900px) { .screen-col:nth-child(2) .phone { transform: none; } }
+.sc-step { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .24em; color: var(--ember); margin-bottom: 10px; }
+.screen-col h3 { font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 16px; margin-bottom: 9px; }
+.screen-col p { font-size: 13.5px; color: var(--smoke); max-width: 30ch; margin: 0 auto; }
+.screen-col p b { color: var(--bone); font-weight: 600; }
+
+/* inner screen chrome */
+.scr { position: absolute; inset: 12px 10px; border-radius: 24px; overflow: hidden; background: #0A0906; }
+.scr-bar { position: absolute; top: 0; left: 0; right: 0; height: 34px; display: flex;
+  justify-content: space-between; align-items: center; padding: 0 14px; z-index: 6;
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .18em; color: var(--smoke); }
+.scr-bar .live { color: var(--ember); }
+.scr-bar .live::before { content: '● '; }
+
+/* venue rows (list screen) */
+.rows { position: absolute; top: 42px; left: 10px; right: 10px; z-index: 5; display: flex; flex-direction: column; gap: 8px; }
+.row { background: rgba(22,17,13,.96); border: 1px solid var(--soot); border-radius: 10px; padding: 10px 11px; text-align: left; position: relative; overflow: hidden; }
+.row::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+.row.peak::before { background: var(--whitehot); box-shadow: 0 0 12px var(--whitehot); }
+.row.lit::before  { background: var(--amber); box-shadow: 0 0 10px var(--amber); }
+.row.chg::before  { background: var(--ember); }
+.row.chill::before{ background: #7A2E00; }
+.row.dead::before { background: #3A2A1E; }
+.row-top { display: flex; justify-content: space-between; align-items: baseline; }
+.row-name { font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 11.5px; color: var(--bone); }
+.row-state { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .16em; }
+.row-state.peak { color: var(--whitehot); } .row-state.lit { color: var(--amber); }
+.row-state.chg { color: var(--ember); } .row-state.chill, .row-state.dead { color: var(--smoke); }
+.row-area { font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: var(--smoke); letter-spacing: .1em; margin-top: 3px; }
+.row-chips { display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap; }
+.chipx { font-family: 'IBM Plex Mono', monospace; font-size: 7.5px; letter-spacing: .08em; color: var(--smoke);
+  border: 1px solid var(--soot); border-radius: 20px; padding: 2px 7px; }
+.chipx.open { color: #4FC56E; border-color: rgba(79,197,110,.35); }
+
+/* venue detail screen */
+.det { position: absolute; top: 42px; left: 12px; right: 12px; bottom: 12px; z-index: 5; text-align: center; }
+.det-name { font-family: 'Unbounded', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 2px; }
+.det-area { font-family: 'IBM Plex Mono', monospace; font-size: 8px; letter-spacing: .16em; color: var(--smoke); margin-bottom: 16px; }
+.ring { width: 128px; height: 128px; margin: 0 auto 14px; border-radius: 50%; position: relative;
+  background: conic-gradient(var(--whitehot) 0 87%, #241C16 87% 100%);
+  box-shadow: 0 0 40px rgba(255,179,0,.35); display: grid; place-items: center; }
+.ring::after { content: ''; position: absolute; inset: 9px; border-radius: 50%; background: #0A0906; }
+.ring-in { position: relative; z-index: 2; }
+.ring-pct { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; line-height: 1; color: var(--whitehot); }
+.ring-state { font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .22em; color: var(--amber); margin-top: 4px; }
+.det-meta { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; color: var(--smoke); letter-spacing: .1em; line-height: 1.9; margin-bottom: 14px; }
+.det-meta b { color: var(--bone); }
+.det-btn { background: var(--ember); color: var(--coal); border-radius: 8px; padding: 10px 0;
+  font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .06em; }
+.det-fine { font-family: 'IBM Plex Mono', monospace; font-size: 7.5px; color: var(--smoke); margin-top: 8px; letter-spacing: .08em; }
+.illus-note { text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #55493C; letter-spacing: .12em; margin-top: 46px; }
+
 /* ── Live strip ── */
 #instrument { max-width: 1180px; margin: 0 auto 40px; padding: 0 5vw; }
 .inst-inner { background: var(--ash); border: 1px solid var(--soot); border-radius: 12px; padding: 22px 26px 26px; }
@@ -118,13 +180,16 @@ h1 { font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: clamp(33
 #pulse-label { font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: .3em; color: var(--amber); }
 #pulse-meta { font-size: 13px; color: var(--smoke); }
 #pulse-meta b { color: var(--bone); }
-.band-wrap { position: relative; padding: 22px 0 30px; }
+.band-wrap { position: relative; padding: 20px 0 4px; }
 .band { position: relative; height: 6px; background: var(--ramp); border-radius: 3px; opacity: .92; }
 .tick { position: absolute; top: -9px; width: 2px; height: 24px; background: var(--bone); border-radius: 1px; transform: translateX(-50%); opacity: .85; }
-.tick::after { content: attr(data-name); position: absolute; top: 28px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .05em; color: var(--smoke); white-space: nowrap; }
-.tick.hot { background: var(--whitehot); box-shadow: 0 0 12px var(--amber); }
-.tick.hot::after { color: var(--bone); }
-.band-scale { display: flex; justify-content: space-between; margin-top: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--smoke); }
+.tick.hot { background: var(--whitehot); box-shadow: 0 0 12px var(--amber); height: 28px; top: -11px; }
+.band-scale { display: flex; justify-content: space-between; margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .2em; color: var(--smoke); }
+#top-venues { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.tv { display: flex; align-items: baseline; gap: 9px; background: var(--coal); border: 1px solid var(--soot); border-radius: 8px; padding: 8px 13px; }
+.tv .tv-rank { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--smoke); letter-spacing: .1em; }
+.tv .tv-name { font-size: 13px; color: var(--bone); font-weight: 600; }
+.tv .tv-score { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
 #inst-note { margin-top: 16px; font-size: 12px; color: var(--smoke); font-family: 'IBM Plex Mono', monospace; }
 #inst-note b { color: var(--ember); font-weight: 500; }
 
@@ -217,8 +282,8 @@ footer a:hover { color: var(--bone); }
     <div class="eyebrow"><span class="dot"></span>LAGOS &middot; LIVE TONIGHT</div>
     <h1>See what's <span class="hot-text">popping</span> right now.</h1>
     <p class="hero-sub">
-      VIIBE is a <b>live map of energy</b> across the city — clubs, lounges,
-      concerts, wherever people gather — read in real time by the people who
+      VIIBE is a <b>live map of energy</b> across the city. Clubs, lounges,
+      concerts, wherever people gather, read in real time by the people who
       are <b>actually there.</b> No more guessing which spot is dead before you
       burn your night on it.
     </p>
@@ -246,7 +311,7 @@ footer a:hover { color: var(--bone); }
         <div class="map-card">
           <div class="mc-top">
             <span class="mc-name">Club Quilox</span>
-            <span class="mc-lvl">POPPING</span>
+            <span class="mc-lvl">PEAK 91%</span>
           </div>
           <div class="mc-bar"><div class="mc-fill"></div></div>
           <div class="mc-sub">23 SCOUTS IN THE ROOM &middot; HEATING UP &middot; 1.2KM</div>
@@ -259,11 +324,11 @@ footer a:hover { color: var(--bone); }
 <div id="instrument">
   <div class="inst-inner reveal">
     <div class="inst-head">
-      <span>LAGOS RIGHT NOW — LIVE FROM THE APP</span>
+      <span>LAGOS RIGHT NOW &middot; LIVE FROM THE APP</span>
       <span id="inst-time">CONNECTING…</span>
     </div>
     <div id="pulse-line">
-      <span id="pulse-score" class="mono">—</span>
+      <span id="pulse-score" class="mono">&middot;&middot;</span>
       <span id="pulse-label">READING</span>
       <span id="pulse-meta"></span>
     </div>
@@ -273,6 +338,7 @@ footer a:hover { color: var(--bone); }
         <span>DEAD</span><span>QUIET</span><span>BUZZING</span><span>POPPING</span><span>ELECTRIC</span>
       </div>
     </div>
+    <div id="top-venues"></div>
     <div id="inst-note">This number is real, pulled live as you read. <b>If Lagos is quiet, it says quiet.</b></div>
   </div>
 </div>
@@ -286,12 +352,12 @@ footer a:hover { color: var(--bone); }
       <div class="val reveal">
         <div class="ic">🗺️</div>
         <h3>The whole city, glowing</h3>
-        <p>A dark map where every spot glows by how alive it is <b>right now</b> — cool for quiet, white-hot for packed. One glance tells you where the night is.</p>
+        <p>A dark map where every spot glows by how alive it is <b>right now</b>: cool for quiet, white-hot for packed. One glance tells you where the night is.</p>
       </div>
       <div class="val reveal">
         <div class="ic">👥</div>
         <h3>Real people, not reviews</h3>
-        <p>The heat comes from scouts <b>physically inside</b> each venue, confirming the vibe in the last few minutes — not last year's star ratings.</p>
+        <p>The heat comes from scouts <b>physically inside</b> each venue, confirming the vibe in the last few minutes, not last year's star ratings.</p>
       </div>
       <div class="val reveal">
         <div class="ic">⚡</div>
@@ -302,6 +368,107 @@ footer a:hover { color: var(--bone); }
   </div>
 </section>
 
+<section class="block" id="walk">
+  <div class="inner">
+    <div class="sec-eyebrow reveal">WHAT IT LOOKS LIKE</div>
+    <h2 class="reveal">Open it. Read the city. Go.</h2>
+    <p class="sec-sub reveal">Three taps from "where should we go tonight" to standing in the right room.</p>
+
+    <div class="screens">
+      <!-- 1. THE MAP -->
+      <div class="screen-col reveal">
+        <div class="phone" aria-hidden="true">
+          <div class="notch"></div>
+          <div class="map">
+            <div class="map-top"><span>LAGOS</span><span class="live">LIVE&nbsp;23:14</span></div>
+            <div class="pin lg hot"  style="left:54%; top:42%;"></div>
+            <div class="pin md warm" style="left:30%; top:31%;"></div>
+            <div class="pin md mid"  style="left:71%; top:57%;"></div>
+            <div class="pin sm cool" style="left:43%; top:66%;"></div>
+            <div class="pin sm mid"  style="left:64%; top:25%;"></div>
+            <div class="pin sm dead" style="left:24%; top:57%;"></div>
+            <div class="pin sm warm" style="left:79%; top:37%;"></div>
+            <div class="pin sm dead" style="left:37%; top:81%;"></div>
+            <div class="pin sm cool" style="left:57%; top:76%;"></div>
+          </div>
+        </div>
+        <div class="sc-step">01 &middot; SCAN</div>
+        <h3>The city, glowing</h3>
+        <p>Every spot lit by how alive it is this minute. <b>Bright means busy.</b> Grey means don't bother.</p>
+      </div>
+
+      <!-- 2. TONIGHT LIST -->
+      <div class="screen-col reveal">
+        <div class="phone" aria-hidden="true">
+          <div class="notch"></div>
+          <div class="map plain">
+            <div class="scr-bar"><span>TONIGHT &middot; NEAR YOU</span><span class="live">LIVE</span></div>
+            <div class="rows">
+              <div class="row peak">
+                <div class="row-top"><span class="row-name">Club Quilox</span><span class="row-state peak">PEAK 91%</span></div>
+                <div class="row-area">VICTORIA ISLAND &middot; 1.2KM</div>
+                <div class="row-chips"><span class="chipx open">Open</span><span class="chipx">Short wait</span><span class="chipx">&#8358;20,000</span></div>
+              </div>
+              <div class="row lit">
+                <div class="row-top"><span class="row-name">Sailors Lounge</span><span class="row-state lit">LIT 74%</span></div>
+                <div class="row-area">VICTORIA ISLAND &middot; 2.0KM</div>
+                <div class="row-chips"><span class="chipx open">Open</span><span class="chipx">No queue</span></div>
+              </div>
+              <div class="row chg">
+                <div class="row-top"><span class="row-name">Backyard BBQ</span><span class="row-state chg">CHARGED 58%</span></div>
+                <div class="row-area">IKOYI &middot; 3.4KM</div>
+                <div class="row-chips"><span class="chipx open">Open</span><span class="chipx">No queue</span></div>
+              </div>
+              <div class="row chill">
+                <div class="row-top"><span class="row-name">Shiro Lagos</span><span class="row-state chill">CHILL 31%</span></div>
+                <div class="row-area">IKOYI &middot; 3.9KM</div>
+                <div class="row-chips"><span class="chipx open">Open</span></div>
+              </div>
+              <div class="row dead">
+                <div class="row-top"><span class="row-name">The Blowfish</span><span class="row-state dead">QUIET 12%</span></div>
+                <div class="row-area">VICTORIA ISLAND &middot; 2.7KM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-step">02 &middot; COMPARE</div>
+        <h3>Ranked by what's alive</h3>
+        <p>Real percentages, updated minute by minute. <b>The queue, the door fee, the distance,</b> all before you move.</p>
+      </div>
+
+      <!-- 3. VENUE DETAIL -->
+      <div class="screen-col reveal">
+        <div class="phone" aria-hidden="true">
+          <div class="notch"></div>
+          <div class="map plain">
+            <div class="scr-bar"><span>&#8249; BACK</span><span class="live">LIVE</span></div>
+            <div class="det">
+              <div class="det-name">Club Quilox</div>
+              <div class="det-area">VICTORIA ISLAND</div>
+              <div class="ring"><div class="ring-in">
+                <div class="ring-pct">91<span style="font-size:15px">%</span></div>
+                <div class="ring-state">PEAK</div>
+              </div></div>
+              <div class="det-meta">
+                <b>23</b> SCOUTS IN THE ROOM<br>
+                PACKED &middot; SHORT WAIT AT THE DOOR<br>
+                <b>HEATING UP</b> &middot; RATED 2 MIN AGO
+              </div>
+              <div class="det-btn">CONFIRM THE VIBE</div>
+              <div class="det-fine">ONLY WORKS INSIDE THE VENUE</div>
+            </div>
+          </div>
+        </div>
+        <div class="sc-step">03 &middot; CONFIRM</div>
+        <h3>Then you become the signal</h3>
+        <p>Once you're in the room, a 3 second check keeps it honest for whoever reads the map next.</p>
+      </div>
+    </div>
+
+    <div class="illus-note">ILLUSTRATION OF THE LIVE APP</div>
+  </div>
+</section>
+
 <section class="block" id="reads">
   <div class="inner">
     <div class="sec-eyebrow reveal">WHY YOU CAN TRUST IT</div>
@@ -309,19 +476,19 @@ footer a:hover { color: var(--bone); }
     <p class="sec-sub reveal">Three stages between a room's energy and your map. Each one exists to keep the signal honest.</p>
     <div class="steps reveal">
       <div class="step">
-        <div class="n">01 — SENSE</div>
+        <div class="n">01 &middot; SENSE</div>
         <h3>Scouts confirm the room</h3>
-        <p>A 3-second vibe check — energy, crowd, the door — accepted only from <b>inside the venue.</b> You can't rate a room you're not in.</p>
+        <p>A 3-second vibe check (energy, crowd, the door) accepted only from <b>inside the venue.</b> You can't rate a room you're not in.</p>
       </div>
       <div class="step">
-        <div class="n">02 — WEIGH</div>
+        <div class="n">02 &middot; WEIGH</div>
         <h3>Reputation is earned</h3>
         <p>Every signal carries its scout's <b>credibility</b>, built from a track record of accurate calls. Being right compounds; noise fades out.</p>
       </div>
       <div class="step">
-        <div class="n">03 — DECAY</div>
+        <div class="n">03 &middot; DECAY</div>
         <h3>The truth expires</h3>
-        <p>Readings <b>fade in minutes</b>, like real energy. A place that was packed at 11 doesn't stay "packed" on the map at 2 — the map keeps up with the night.</p>
+        <p>Readings <b>fade in minutes</b>, like real energy. A place that was packed at 11 doesn't stay "packed" on the map at 2. The map keeps up with the night.</p>
       </div>
     </div>
   </div>
@@ -331,16 +498,16 @@ footer a:hover { color: var(--bone); }
   <div class="inner">
     <div class="sec-eyebrow reveal">FOR VENUE OWNERS</div>
     <h2 class="reveal">Your room's pull, on the record</h2>
-    <p class="sec-sub reveal">The energy your venue generates is an asset. VIIBE puts a number on it — and puts it on your wall.</p>
+    <p class="sec-sub reveal">The energy your venue generates is an asset. VIIBE puts a number on it, and puts it on your wall.</p>
     <div class="venue-grid">
       <div class="v-card wide reveal">
         <div>
           <span class="tag">THE BIG SCREEN</span>
           <h3>Project your energy on the wall</h3>
-          <p>Put VIIBE on the screen at your venue. The crowd watches their own night climb the city's energy ladder toward <b>ELECTRIC</b> — live, in front of everyone. A room that can see itself winning, pushes harder.</p>
+          <p>Put VIIBE on the screen at your venue. The crowd watches their own night climb the city's energy ladder toward <b>ELECTRIC</b>, live, in front of everyone. A room that can see itself winning, pushes harder.</p>
         </div>
         <div class="screen-mock" aria-hidden="true">
-          <div class="sm-venue">CLUB QUILOX — VICTORIA ISLAND</div>
+          <div class="sm-venue">CLUB QUILOX &middot; VICTORIA ISLAND</div>
           <div class="sm-level">POPPING</div>
           <div class="sm-bar"><div class="sm-fill"></div></div>
           <div class="sm-stats"><b>23</b> IN THE ROOM &middot; <b>41</b> WATCHING &middot; <b>3RD</b> IN LAGOS</div>
@@ -349,12 +516,12 @@ footer a:hover { color: var(--bone); }
       <div class="v-card reveal">
         <span class="tag">WATCHERS</span>
         <h3>See who's pulled toward you</h3>
-        <p>People who want to be there but aren't yet — <b>watching your energy</b> from across the city. Live demand, counted, never identified.</p>
+        <p>People who want to be there but aren't yet, <b>watching your energy</b> from across the city. Live demand, counted, never identified.</p>
       </div>
       <div class="v-card reveal">
         <span class="tag">LIFT REPORT</span>
         <h3>Did the night pay for itself?</h3>
-        <p>Your ₦500k DJ, your promo, your Friday — did it actually lift the room? <b>One weekly report</b> that ties energy to spend, in naira.</p>
+        <p>Your ₦500k DJ, your promo, your Friday. Did it actually lift the room? <b>One weekly report</b> that ties energy to spend, in naira.</p>
       </div>
     </div>
   </div>
@@ -364,7 +531,7 @@ footer a:hover { color: var(--bone); }
   <div class="inner">
     <div class="sec-eyebrow reveal">THE BIGGER IDEA</div>
     <h2 class="reveal">Nightlife is only the beginning</h2>
-    <p class="sec-sub reveal">Wherever people gather, there's energy — concerts, festivals, game nights, owambe. VIIBE is building the live layer that measures all of it. Nightlife is simply where the signal decays fastest and matters most, so it's where we start.</p>
+    <p class="sec-sub reveal">Wherever people gather, there's energy: concerts, festivals, game nights, owambe. VIIBE is building the live layer that measures all of it. Nightlife is simply where the signal decays fastest and matters most, so it's where we start.</p>
     <p class="sec-sub reveal" style="margin-top:-28px;">And the same live feed a person reads, a machine can too. When you ask <b style="color:var(--bone)">Siri, ChatGPT, Claude, or Gemini</b> "where's alive tonight?", the answer has to come from somewhere. Today, nobody holds that signal. We're building so it comes from VIIBE.</p>
     <pre class="api reveal"><span class="c"># the same map, machine-readable</span>
 GET /api/city-pulse/lagos
@@ -388,7 +555,7 @@ GET /api/city-pulse/lagos
   <div class="inner reveal">
     <div class="sec-eyebrow">GET IN EARLY</div>
     <h2 style="max-width:none; margin:0 auto;">Be a founding scout in Lagos</h2>
-    <p class="sec-sub" style="margin:16px auto 0;">Early access is rolling out in the Lekki / Victoria Island corridor first. Come help map the city — or bring VIIBE to your venue.</p>
+    <p class="sec-sub" style="margin:16px auto 0;">Early access is rolling out in the Lekki / Victoria Island corridor first. Come help map the city, or bring VIIBE to your venue.</p>
     <div class="cta-row">
       <a class="btn btn-hot" href="mailto:yoriajagun08@gmail.com?subject=VIIBE%20early%20access%20-%20scout">Get early access</a>
       <a class="btn btn-cool" href="mailto:yoriajagun08@gmail.com?subject=VIIBE%20for%20my%20venue">VIIBE for your venue</a>
@@ -421,20 +588,30 @@ async function readCity() {
     document.getElementById('pulse-meta').innerHTML = meta.join(' &middot; ');
     document.getElementById('inst-time').textContent =
       'LIVE · ' + new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+    const ranked = (venues || [])
+      .slice()
+      .sort((a, b) => (b.current_vibe_score || 0) - (a.current_vibe_score || 0));
+
+    // ticks: position only, no text (labels collided when venues clustered)
     const band = document.getElementById('band');
     band.querySelectorAll('.tick').forEach(t => t.remove());
-    (venues || [])
-      .sort((a, b) => (b.current_vibe_score || 0) - (a.current_vibe_score || 0))
-      .slice(0, 6)
-      .forEach((v, i) => {
-        const t = document.createElement('div');
-        t.className = 'tick' + (i === 0 ? ' hot' : '');
-        t.style.left = Math.max(1.5, Math.min(98.5, v.current_vibe_score)) + '%';
-        t.dataset.name = i < 2 ? v.name.toUpperCase().slice(0, 18) : '';
-        band.appendChild(t);
-      });
+    ranked.slice(0, 8).forEach((v, i) => {
+      const t = document.createElement('div');
+      t.className = 'tick' + (i === 0 ? ' hot' : '');
+      t.style.left = Math.max(1.5, Math.min(98.5, v.current_vibe_score || 0)) + '%';
+      band.appendChild(t);
+    });
+
+    // legible leaderboard instead of overlapping labels
+    const heat = s => s >= 80 ? 'var(--whitehot)' : s >= 55 ? 'var(--amber)' : s >= 30 ? 'var(--ember)' : 'var(--smoke)';
+    document.getElementById('top-venues').innerHTML = ranked.slice(0, 3).map((v, i) => {
+      const sc = Math.round(v.current_vibe_score || 0);
+      return `<div class="tv"><span class="tv-rank">${i + 1}</span>` +
+             `<span class="tv-name">${v.name}</span>` +
+             `<span class="tv-score" style="color:${heat(sc)}">${sc}%</span></div>`;
+    }).join('');
   } catch (e) {
-    document.getElementById('inst-time').textContent = 'SIGNAL LOST — RETRYING';
+    document.getElementById('inst-time').textContent = 'SIGNAL LOST &middot; RETRYING';
   }
 }
 readCity();
