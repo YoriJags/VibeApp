@@ -1,12 +1,26 @@
-# VIIBE — The Live Human Energy Layer
+# VIIBE
 
 <p align="center">
   <img src="./docs/vibe-logo.png" alt="Vibe Logo" width="120" />
 </p>
 
-**VIIBE** measures live human energy: wherever people gather, scouts confirm what the room actually feels like, right now — decay-honest, credibility-weighted, never faked. Consumers see where the city is alive; venues see their pull (live watchers, verified arrivals, energy strata); agents and partners buy the aggregate signal through the intel API.
+> ### Google Maps shows you traffic. VIIBE shows you where the city is alive.
 
-**Nightlife in Lagos is market one** — the scene where energy decays fastest and the truth is worth the most. The architecture is scene-agnostic (rating taxonomies, venue-type dimensions, a decay engine that doesn't care what the gathering is); concerts, festivals, and street events are configuration, not rebuilds.
+Scouts inside a venue confirm what the room actually feels like right now, in
+three seconds. Readings decay in minutes, because energy does. The result is a
+live city map where every gathering glows by how alive it is.
+
+Consumers stop guessing where to go. Venues pay for the truth about their own
+rooms. Machines query the same feed, which is how VIIBE becomes the layer
+assistants answer "where's alive tonight" from.
+
+**Nightlife in Lagos is market one, not the identity.** The architecture is
+scene-agnostic: concerts, festivals and street events are configuration, not
+rebuilds.
+
+**Read [`IDENTITY.md`](./IDENTITY.md) first.** It is the canonical answer to
+what this is and how to describe it. [`docs/README.md`](./docs/README.md) maps
+every other document and flags the superseded ones.
 
 ## Table of Contents
 
