@@ -8,6 +8,7 @@ import asyncio
 from fastapi import APIRouter, Header
 
 from app.config import db, CITIES
+from app.services.promotion import compute_promotion
 
 router = APIRouter(tags=["venues"])
 
@@ -193,6 +194,7 @@ async def get_venues(city: Optional[str] = None):
     for venue in venues:
         venue["ratings_last_30m"] = spike_data.get(venue.get("id"), 0)
         venue["pulse"] = compute_pulse(venue)
+        venue["promotion"] = compute_promotion(venue)
         is_open = compute_is_open_now(venue)
         venue["is_open_now"] = is_open
         if is_open is False:
@@ -215,6 +217,7 @@ async def get_venue(venue_id: str, authorization: str = Header(default="")):
     asyncio.create_task(_update_venue_scores(venue_id))
 
     venue["pulse"] = compute_pulse(venue)
+    venue["promotion"] = compute_promotion(venue)
     is_open = compute_is_open_now(venue)
     venue["is_open_now"] = is_open
     if is_open is False:

@@ -589,10 +589,11 @@ async def calculate_venue_aggregate(venue_id: str) -> dict:
     previous_score = venue.get("current_vibe_score")
 
     if not ratings:
+        # Paid promotion never touches the score. An empty room reads empty,
+        # boosted or not. (Promotion buys placement; see is_promoted below.)
         base_score = venue.get("admin_override_score", 0) or 0
-        glow_boost = venue.get("glow_boost", 0) or 0
         return {
-            "current_vibe_score": min(100, base_score + glow_boost),
+            "current_vibe_score": min(100, base_score),
             "energy_level":       "quiet",
             "vibe_state":         "quiet",
             "capacity_level":     "sparse",
@@ -616,10 +617,11 @@ async def calculate_venue_aggregate(venue_id: str) -> dict:
             {"$set": {"low_confidence": True, "fraud_flagged_at": now}},
         )
 
-    # ── Glow boost + admin override ───────────────────────────────────────────
-    glow_boost = venue.get("glow_boost", 0) or 0
-    avg_score  = min(100, avg_score + glow_boost)
-
+    # ── Admin override ────────────────────────────────────────────────────────
+    # NOTE: paid promotion (Pulse Drops) deliberately does NOT appear here.
+    # Money buys reach, placement and a badge, never the energy number. The
+    # moment a venue can buy a higher score, the signal is worthless to the
+    # venues and partners who pay for it being true. See is_promoted below.
     if venue.get("admin_override_score") is not None:
         avg_score = venue["admin_override_score"]
 
