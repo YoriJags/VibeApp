@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>VIIBE Pocket Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: 420pt 790pt; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  :root {
+    --coal:#0B0908; --ash:#16110D; --soot:#2E241C;
+    --bone:#F4EFE6; --smoke:#A89B8C; --faint:#6B5F52;
+    --ember:#FF4D00; --amber:#FFB300; --whitehot:#FFF3D6;
+    --ramp: linear-gradient(90deg,#241C16 0%,#7A2E00 30%,#E85D00 58%,#FFB300 84%,#FFF3D6 100%);
+    --ramp-text: linear-gradient(90deg,#FF4D00 0%,#FF8A00 32%,#FFB300 66%,#FFF3D6 100%);
+  }
+  body { background: var(--coal); color: var(--bone); font-family:'Archivo',sans-serif; font-size:13px; line-height:1.62; }
+  .pg { width:420pt; height:790pt; padding:34pt 30pt; page-break-after:always; position:relative; overflow:hidden; background:var(--coal); }
+  .pg:last-child { page-break-after:auto; }
+
+  .kicker { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.28em; color:var(--ember); margin-bottom:14px; }
+  h1 { font-family:'Unbounded',sans-serif; font-weight:800; font-size:31px; line-height:1.1; margin-bottom:16px; }
+  h2 { font-family:'Unbounded',sans-serif; font-weight:600; font-size:20px; line-height:1.22; margin-bottom:12px; }
+  h3 { font-family:'Unbounded',sans-serif; font-weight:600; font-size:13.5px; margin-bottom:5px; }
+  p  { color:var(--smoke); margin-bottom:11px; }
+  b, strong { color:var(--bone); font-weight:600; }
+  .hot { color:transparent; background:var(--ramp-text); -webkit-background-clip:text; background-clip:text; }
+  .strata { height:3px; background:var(--ramp); border-radius:2px; margin:16px 0 20px; }
+  .rule { height:1px; background:var(--soot); margin:16px 0; }
+
+  .card { background:var(--ash); border:1px solid var(--soot); border-radius:9px; padding:14px 15px; margin-bottom:11px; }
+  .card .tag { font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.2em; color:var(--amber); margin-bottom:6px; }
+  .card p { font-size:12px; margin-bottom:0; }
+  .card .price { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--whitehot); margin-top:7px; display:block; }
+  .card.flag { border-color:#7A2E00; }
+  .card.flag .tag { color:var(--ember); }
+
+  .line { font-family:'Unbounded',sans-serif; font-weight:600; font-size:16.5px; line-height:1.32; color:var(--bone); margin-bottom:7px; }
+  .who { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.22em; color:var(--ember); margin-bottom:6px; }
+  .say-block { margin-bottom:19px; }
+
+  table { width:100%; border-collapse:collapse; font-size:11.5px; margin-bottom:12px; }
+  td, th { text-align:left; padding:7px 6px; border-bottom:1px solid var(--soot); color:var(--smoke); vertical-align:top; }
+  th { font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.16em; color:var(--bone); }
+  td b { color:var(--bone); }
+
+  ul { list-style:none; }
+  li { color:var(--smoke); padding-left:15px; position:relative; margin-bottom:7px; font-size:12px; }
+  li::before { content:'>'; position:absolute; left:0; color:var(--ember); font-family:'IBM Plex Mono',monospace; font-size:10px; }
+
+  .foot { position:absolute; bottom:22pt; left:30pt; right:30pt; font-family:'IBM Plex Mono',monospace;
+          font-size:8px; letter-spacing:.2em; color:var(--faint); display:flex; justify-content:space-between; }
+  .big-num { font-family:'Unbounded',sans-serif; font-weight:800; font-size:44px; line-height:1; color:var(--amber); }
+  .cover-mark { font-family:'Unbounded',sans-serif; font-weight:800; font-size:15px; letter-spacing:.34em; }
+  .cover-mark em { font-style:normal; color:var(--ember); }
+  .center-block { position:absolute; top:50%; left:30pt; right:30pt; transform:translateY(-50%); }
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<div class="pg">
+  <div class="cover-mark">VII<em>B</em>E</div>
+  <div class="center-block">
+    <div class="kicker">SAY THIS FIRST</div>
+    <h1>Google Maps tells you how to get there.<br><span class="hot">VIIBE tells you if it's worth going.</span></h1>
+    <div class="strata"></div>
+    <p style="font-size:13.5px;">A live map of crowd energy, read by the people actually in the room. Lagos first.</p>
+  </div>
+  <div class="foot"><span>POCKET BRIEF</span><span>KEEP ON PHONE</span></div>
+</div>
+
+<!-- 2. THE THREE LINES -->
+<div class="pg">
+  <div class="kicker">THREE ROOMS, THREE LINES</div>
+  <h2>Never mix these up</h2>
+  <p>The story stopped landing because all three were said at once. Pick by who is in front of you.</p>
+  <div class="strata"></div>
+
+  <div class="say-block">
+    <div class="who">TO A PERSON</div>
+    <div class="line">"You know how Maps shows red where there's traffic? We do that for where people gather."</div>
+    <p style="font-size:11px;">Never say: sensor network, energy layer, intel market.</p>
+  </div>
+
+  <div class="say-block">
+    <div class="who">TO A VENUE OWNER</div>
+    <div class="line">"Did your last big night actually fill the room? We can show you, in naira."</div>
+    <p style="font-size:11px;">Never say: scouts, clout, anything about the consumer game.</p>
+  </div>
+
+  <div class="say-block">
+    <div class="who">TO AN INVESTOR</div>
+    <div class="line">"Traffic data made Maps indispensable. Nobody has that data for human gatherings. We're building it."</div>
+    <p style="font-size:11px;">Never say: nightlife app. That is a category graveyard.</p>
+  </div>
+
+  <div class="foot"><span>WHO YOU ARE TALKING TO</span><span>02</span></div>
+</div>
+
+<!-- 3. WHAT IT IS -->
+<div class="pg">
+  <div class="kicker">THE 30 SECOND VERSION</div>
+  <h2>What VIIBE actually is</h2>
+  <p>Scouts inside a venue confirm what the room feels like right now, in three seconds. Readings <b>decay in minutes</b>, because energy does. The result is a live city map where every gathering glows by how alive it is: white hot for packed, grey for dead.</p>
+  <p>Consumers stop guessing where to go. <b>Venues pay for the truth about their own rooms.</b> Machines query the same feed, which is how VIIBE becomes the layer assistants answer "where's good tonight" from.</p>
+  <p><b>Nightlife in Lagos is market one, not the identity.</b> The engine does not know what a nightclub is. Concerts, festivals and street events are configuration, not rebuilds.</p>
+  <div class="strata"></div>
+  <div class="kicker">THE SPINE</div>
+  <table>
+    <tr><th>LAYER</th><th>QUESTION</th></tr>
+    <tr><td><b>1. SENSE</b><br>input</td><td>Is this real?<br><span style="font-size:10px;">Geofence, credibility weights, decay, anti-fake gates</span></td></tr>
+    <tr><td><b>2. READ</b><br>product</td><td>Where should I go?<br><span style="font-size:10px;">The map, venue detail, peak countdown, Big Screen</span></td></tr>
+    <tr><td><b>3. SELL</b><br>revenue</td><td>What is it worth?<br><span style="font-size:10px;">Venue dashboard, watchers, Lift Report, agent API</span></td></tr>
+  </table>
+  <p style="font-size:11.5px;">If a feature does not fit a layer, it does not ship. This is also the build order and the pitch order.</p>
+  <div class="foot"><span>THE SPINE</span><span>03</span></div>
+</div>
+
+<!-- 4. REVENUE OVERVIEW -->
+<div class="pg">
+  <div class="kicker">HOW THIS MAKES MONEY</div>
+  <h2>Four tiers, in order</h2>
+  <p>Ordered by what earns soonest and holds up best. The consumer app is <b>not</b> the business; it is how the data gets collected.</p>
+  <div class="strata"></div>
+  <table>
+    <tr><th>TIER</th><th>WHEN</th><th>SIZE</th></tr>
+    <tr><td><b>1. Venue SaaS</b></td><td>Now, no scale needed</td><td>&#8358;500k/mo at 20 venues</td></tr>
+    <tr><td><b>2. Lagos plays</b></td><td>3 to 12 months</td><td>&#8358;1M to 3M/mo</td></tr>
+    <tr><td><b>3. Brands</b></td><td>6 to 18 months</td><td>&#8358;2M to 5M per deal</td></tr>
+    <tr><td><b>4. Exit assets</b></td><td>Year 2+</td><td>The multiple</td></tr>
+  </table>
+  <div class="rule"></div>
+  <h3>The rule that protects all of it</h3>
+  <p>Money buys <b>placement and visibility, never the score.</b> The day the number can be bought is the day nobody pays for the data. Sponsored slots, badges, bigger pins: yes. A higher energy reading: never.</p>
+  <div class="foot"><span>REVENUE LADDER</span><span>04</span></div>
+</div>
+
+<!-- 5. TIER 1 -->
+<div class="pg">
+  <div class="kicker">TIER 1 &middot; START HERE</div>
+  <h2>Revenue that needs no scale</h2>
+  <p style="font-size:11.5px;">All three work with a handful of scouts and one venue. Rails already built.</p>
+
+  <div class="card">
+    <div class="tag">VENUE INTELLIGENCE SUBSCRIPTION</div>
+    <h3>The truth about their own room</h3>
+    <p>Live energy, watchers in orbit, weekly Lift Report, district benchmark. Recurring, and it never touches the public signal.</p>
+    <span class="price">&#8358;25,000 to &#8358;50,000 per venue / month</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">THE LIFT REPORT &middot; THE WEDGE</div>
+    <h3>"Did the &#8358;500k DJ pay for itself?"</h3>
+    <p>The most expensive unanswered question in Lagos nightlife. Nobody can answer it. You can. This gets the meeting; the subscription is what you sell in it.</p>
+    <span class="price">Free pilot, then converts to subscription</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">VIIBE CERTIFIED BADGE</div>
+    <h3>Credibility they cannot fake</h3>
+    <p>Venues live on Instagram credibility. A third-party verified "consistently high energy" badge is something they can post and rivals cannot buy. Already computed in the engine. Near pure margin.</p>
+    <span class="price">&#8358;15,000 per month, per venue</span>
+  </div>
+
+  <div class="rule"></div>
+  <div class="kicker">THE FIRST &#8358; , STEP BY STEP</div>
+  <ul>
+    <li>Two venues on a <b>free pilot</b>, Fridays only.</li>
+    <li>Send a Lift Report every Monday morning, without fail.</li>
+    <li>Week four: "this is what it showed. It is &#8358;25k a month to keep it."</li>
+    <li>One paid invoice is the milestone, not the amount. <b>The receipt is the proof.</b></li>
+  </ul>
+  <div class="foot"><span>NOW</span><span>05</span></div>
+</div>
+
+<!-- 6. TIER 2 -->
+<div class="pg">
+  <div class="kicker">TIER 2 &middot; THE LAGOS PLAYS</div>
+  <h2>Things only you can sell</h2>
+  <p style="font-size:11.5px;">These use data you already collect and nobody else has.</p>
+
+  <div class="card">
+    <div class="tag">PRE-ARRIVAL OPS FEED</div>
+    <h3>"38 people are on their way"</h3>
+    <p>You already capture "I Dey Road" intent. Tell a venue who is en route <b>before they arrive</b>: staff up, open the second bar, brief the door. No competitor has forward-looking demand.</p>
+    <span class="price">&#8358;15,000/mo add-on</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">PROMOTER SCORECARD</div>
+    <h3>A credit score for the people who move Lagos</h3>
+    <p>Promoters claim they fill rooms. Nobody verifies. You can measure whether energy actually lifted on their nights. Sell verified ratings to the venues who hire them, and a Verified badge to the promoters who deliver. Two-sided.</p>
+    <span class="price">&#8358;10,000/mo promoter &middot; bundled for venues</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">SPONSORED REWARD POOLS</div>
+    <h3>Brand money that does not corrupt the score</h3>
+    <p>Pool funding already exists for merchants. Let brands fund it: "Guinness is paying double clout at these five venues tonight." Advertising that <b>creates</b> real scouting instead of faking it.</p>
+    <span class="price">&#8358;250,000+ per campaign night</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">BIG SCREEN SPONSORSHIP</div>
+    <h3>The wall becomes inventory</h3>
+    <p>Venues project VIIBE. A brand sponsors the frame around the number, never the number itself.</p>
+    <span class="price">&#8358;100,000+ per venue / month</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">DJ AND TALENT PERFORMANCE</div>
+    <h3>Which names actually lift a room</h3>
+    <p>Same logic as promoters, applied to talent. Venues pay to book right instead of by reputation. DJs pay for verified proof they deliver.</p>
+    <span class="price">Bundled with venue subscription</span>
+  </div>
+  <div class="foot"><span>3 TO 12 MONTHS</span><span>06</span></div>
+</div>
+
+<!-- 7. TIER 3 -->
+<div class="pg">
+  <div class="kicker">TIER 3 &middot; THE BIG MONEY</div>
+  <h2>Where the real naira is</h2>
+
+  <div class="card">
+    <div class="tag">BRAND ACTIVATION INTELLIGENCE</div>
+    <h3>Targeting, then proof</h3>
+    <p>Guinness, Heineken, Trophy, Hennessy and their agencies spend heavily on Lagos nightlife with <b>no targeting data and no verification</b>. Sell both: where to activate this Friday, and whether last week's activation actually lifted the room.</p>
+    <span class="price">&#8358;2M to &#8358;5M per agency deal</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">DETTY DECEMBER PACKAGE</div>
+    <h3>The one month with hard currency</h3>
+    <p>Mid-December to early January, the diaspora returns with money and <b>zero local knowledge</b>. Highest willingness to pay in the year, on both sides: a premium concierge tier for returnees, and December activation intelligence sold to brands at peak rates. Time-boxed, high margin, annual.</p>
+    <span class="price">Premium seasonal pricing</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">SITE SELECTION REPORTS</div>
+    <h3>"Where should the next lounge open?"</h3>
+    <p>Footfall and energy heatmaps sold to developers and investors opening venues. One report, one invoice.</p>
+    <span class="price">&#8358;1M to &#8358;5M per report</span>
+  </div>
+
+  <div class="card">
+    <div class="tag">TABLE BOOKING COMMISSION</div>
+    <h3>Paid rail already live</h3>
+    <p>Lagos tables run &#8358;100k to &#8358;2M. Booking flow and Paystack are built. Commission on high-intent bookings the map itself created.</p>
+    <span class="price">5 to 10 percent per booking</span>
+  </div>
+
+  <div class="foot"><span>6 TO 18 MONTHS</span><span>07</span></div>
+</div>
+
+<!-- 8. TIER 4 + THE FIX -->
+<div class="pg">
+  <div class="kicker">TIER 4 &middot; THE EXIT ASSETS</div>
+  <h2>What an acquirer buys</h2>
+  <ul>
+    <li><b>The assistant layer.</b> When someone asks Siri, ChatGPT, Claude or Gemini "where's good tonight", the answer has to come from somewhere. The agent API and MCP server are live today.</li>
+    <li><b>Movement and taste data.</b> Who goes where, with whom, at what hour, across a whole city.</li>
+    <li><b>Ride demand.</b> Uber and Bolt want to know where crowds will be at 2am before they are.</li>
+    <li><b>The category position.</b> Nobody owns live human energy data in Africa. That is the thing being bought.</li>
+  </ul>
+
+  <div class="strata"></div>
+  <div class="kicker" style="color:var(--ember);">FIX THIS BEFORE SELLING ANYTHING</div>
+  <div class="card flag">
+    <div class="tag">PAID BOOST CURRENTLY INFLATES THE SCORE</div>
+    <p>In the scoring engine, a purchased Pulse Drop adds directly to the public energy score. A venue can pay to look hotter than it is. That is the one thing that, if noticed, kills the venue and brand business at once: <b>nobody licenses crowd data that can be bought.</b></p>
+    <p style="margin-top:8px;">Fix: paid money buys placement, badges, position. Never the number.</p>
+  </div>
+  <div class="foot"><span>YEAR 2+</span><span>08</span></div>
+</div>
+
+<!-- 9. CLOSING -->
+<div class="pg">
+  <div class="center-block">
+    <div class="kicker">THE PROMISE THAT MAKES IT WORTH BUYING</div>
+    <h1 style="font-size:26px;">We would rather show you <span class="hot">nothing</span> than lie to you.</h1>
+    <div class="strata"></div>
+    <p>Readings expire. Remote taps are damped. Peak status needs corroboration and a sustained hold. A quiet map is allowed to look quiet.</p>
+    <p>This is not modesty. It is the moat. The day the signal can be faked, every revenue line above dies at once.</p>
+    <div class="rule"></div>
+    <div class="kicker">THE TEST</div>
+    <p>You have the pitch when a stranger repeats it back after hearing it once:</p>
+    <div class="line" style="margin-top:8px;">"It's traffic, but for parties."</div>
+    <p style="margin-top:10px;">When they say that, stop explaining and start selling.</p>
+  </div>
+  <div class="foot"><span>VIIBE &middot; LAGOS</span><span>09</span></div>
+</div>
+
+</body>
+</html>
