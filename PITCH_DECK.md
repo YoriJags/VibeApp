@@ -1,3 +1,12 @@
+> # SUPERSEDED, DO NOT USE
+>
+> This is the older **VIBEZ**-branded deck, kept for history only. The current
+> deck is [`docs/PITCH_DECK.md`](./docs/PITCH_DECK.md). Its strongest sections,
+> the terminal thesis and the assistant strategy, have been carried across.
+> See [`IDENTITY.md`](./IDENTITY.md) for how VIIBE is described now.
+
+---
+
 # VIBEZ — Investor Pitch Deck
 ## Real-Time Social Venue Intelligence · Africa
 **Pre-Seed · February 2026 · Lagos, Nigeria**
