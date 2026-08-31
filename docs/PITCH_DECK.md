@@ -5,48 +5,73 @@
 
 ## SLIDE 1 — THE HOOK
 
-> ## Google Maps tells you how to get there.
-> ## VIIBE tells you if it's worth going.
+> ### Google Maps tells you how to get there.
+> ### VIIBE tells you if it's worth going.
 
-**It's 11pm on a Friday in Lagos.**
+Friday, 11pm, Victoria Island. Six places you could be. Every one of their
+Instagram pages says the same thing tonight, because every promoter posts the
+same thing every night. You pick one, pay ₦10,000 at the door, and walk into a
+room holding forty people.
 
-You're deciding between 6 venues. You've checked 3 Instagram pages — all of them say "come through, it's mad tonight." You make a call. Wrong venue. Empty room. Night wasted.
-
-**₦10,000 entry fee. 45 minutes of your life. Zero information.**
+You already know how that story ends, because it has happened to you.
 
 ---
 
 ## SLIDE 2 — THE PROBLEM
 
-### The ₦1.5 Trillion Information Gap
+### An economy this size should not be running on rumour
 
-Lagos's nightlife economy generates approximately ₦1.5 trillion (~$930M) in annual spend. Lagos alone has 4,000+ active nightlife venues across VI, Lekki, Ikoyi, Ikeja, and Surulere.
+Lagos nightlife turns over hundreds of billions of naira a year across roughly
+four thousand venues. Every other industry that moves money at this scale has
+an instrument pointed at it. Retail counts footfall. Broadcast has ratings.
+The roads have live traffic. Nightlife has promoter claims and last week's
+stories.
 
-**But the information layer is broken:**
+Two people lose from that, in different ways.
 
-- No live venue data exists anywhere — social media is staged, delayed, and curated by promoters.
-- Promoters always say "it's mad." There is no independent verification.
-- A squad of 6 planning a night out needs a WhatsApp thread, phone calls, and someone willing to go first and report back.
-- Venue owners have no real-time demand signal. They spend on influencer campaigns without knowing if their floor is empty or full.
+**The person choosing.** Instagram is marketing, not information. It is filmed
+in the one minute the room looked full, posted an hour late, and captioned by
+someone whose job is to fill the place. There is no independent read anywhere.
+So six friends open a WhatsApp thread, somebody volunteers to go first, and
+the verdict arrives too late for anyone to act on.
 
-**The market has money. The market has venues. The market is missing intelligence.**
+**The owner spending.** This is the part outsiders usually get wrong. An owner
+can see their own floor perfectly well; they are standing on it. What they
+cannot see is anything outside their own building. Was Saturday good *for a
+Saturday*, or ordinary? Did the ₦500,000 DJ fill the room, or would it have
+filled anyway? How many people opened their phone at 10pm, considered this
+place, and went three streets over instead?
+
+They are handed an outcome with no comparison and no counterfactual, then asked
+to keep spending against it. That second gap is the one with a budget attached.
 
 ---
 
 ## SLIDE 3 — THE SOLUTION
 
-### VIIBE: Real-Time Nightlife Intelligence for Nigeria
+### A live reading of a room, taken by the people standing in it
 
-VIIBE is a community-verified, live venue intelligence platform.
+VIIBE makes the crowd the instrument.
 
-**The core loop:**
-1. **Scouts** (users) physically visit venues and submit 3-second vibe checks from inside the geofence.
-2. Our **scoring engine** aggregates their reports into a live 0–100 Vibe Score per venue.
-3. **Anyone** can see which venues are actually alive, right now, before they leave the house.
-4. **Merchants** see the same data on their private dashboard and can amplify their signal with paid boosts.
-5. **More users → more data → more accuracy → more useful → more users.** Flywheel.
+Someone inside a venue answers three things in about three seconds: how the
+energy feels, how full it is, what the door is doing. Their phone confirms they
+are actually there. That reading joins the others from the same room in the
+last few minutes, weighted by how reliable that scout has proven to be over
+time, and it fades out of the score as it ages. What survives is a number for
+how alive the place is right now, and a city map that glows by it.
 
-No staging. No curation. Verified by real people, physically on location, with GPS enforcement.
+The same reading serves three different people:
+
+- Someone deciding where to go sees where the night actually is, before leaving
+  the house.
+- A venue sees its own room in context for the first time: where it ranks
+  tonight, how many people are watching it from across the city, and whether
+  the money it spent moved anything.
+- Machines read the same feed through an API that is already live in
+  production.
+
+Nothing here is staged, and nothing can be bought. Those two constraints are
+not policy, they are the product.
 
 ---
 
@@ -122,7 +147,7 @@ A competitor launching today inherits zero of this. No scout network, no histori
 
 ## SLIDE 6B — WHY THE SIGNAL CANNOT BE BOUGHT
 
-### The moat is not the data. It is that the data cannot be faked.
+### Anyone can copy a venue list. Copying a number people trust is harder.
 
 Any competitor can build a venue list. What is hard to copy is a number that
 buyers trust enough to spend against. Four enforcement layers, all shipped:
@@ -136,9 +161,9 @@ buyers trust enough to spend against. Four enforcement layers, all shipped:
 
 > **We would rather show you nothing than lie to you.**
 
-This is not brand language. It is the commercial precondition: a venue will not
-pay for a dashboard its rivals can purchase their way up, and no partner
-licenses crowd data that can be bought.
+That line gets quoted as brand language. It is closer to a commercial
+precondition. No venue pays for a dashboard its rivals can buy their way up,
+and no partner licenses crowd data with a price list attached.
 
 ---
 
@@ -176,8 +201,8 @@ Lagos-first, expanding to Abuja + Port Harcourt + Ibadan:
 
 ### We sell the truth about a room to the people who own it
 
-The consumer app is not the business. It is how the data gets collected.
-Revenue comes from three buyers, in this order.
+The consumer app collects the data. The revenue sits behind it, with three
+buyers, in this order.
 
 **1. Venue Intelligence Subscription — the core line**
 
@@ -186,9 +211,9 @@ Revenue comes from three buyers, in this order.
 | Standard | ₦25,000 | Live energy, watcher counts, weekly Lift Report, district benchmark |
 | Pro | ₦75,000 | Adds the pre-arrival ops feed, promoter and talent performance, priority support |
 
-Works with a handful of scouts and one venue. It needs no consumer scale,
-which decouples revenue risk from liquidity risk. That is the single most
-important structural fact about this business.
+This works with a handful of scouts and a single venue. No consumer scale is
+required for it to earn, so the revenue does not have to wait on liquidity.
+Most apps in this category died waiting.
 
 **2. Attribution: the Lift Report — the wedge that opens the door**
 
@@ -206,11 +231,11 @@ gets the meeting; the subscription is what we sell in it.**
 | Flare | ₦15,000 | 4 hours | 5km | Adds a top-3 sponsored slot |
 | Supernova | ₦50,000 | 8 hours | City-wide | Adds the #1 sponsored slot and custom map icon |
 
-**Paid promotion buys reach, position and a badge. It cannot buy the energy
-score.** Sponsored venues render marked, the way a sponsored search result is
-marked. This is enforced in the scoring engine and covered by a regression
-test, because the moment the number can be bought, every line above and below
-it becomes worthless.
+**Promotion buys reach and position. It cannot buy the score.** Sponsored
+venues are rendered as sponsored, the way a paid search result is. The rule is
+enforced inside the scoring engine, and a test fails the build if anyone
+re-adds a boost to the maths. Without that rule the rest of this page collapses:
+a number with a price list is not worth subscribing to.
 
 **4. Brand activation intelligence — where the scale revenue is**
 
@@ -234,12 +259,12 @@ mobility platforms.
 
 | Horizon | What it looks like |
 |---|---|
-| Months 0–12 | 20 venues subscribed. Roughly **₦500k/month**. The point is not the amount, it is the proof that venues pay. |
+| Months 0–12 | 20 venues subscribed. Roughly **₦500k/month**. Small money, but it is the first evidence that venues will pay at all. |
 | Months 12–24 | 60+ venues, ops-feed upsells, first brand engagements. **₦2M to 4M/month.** |
 | Months 24–36 | Brand and data lines lead. **₦10M+/month**, with venue SaaS as the reliable base. |
 
-We would rather show a small number that is real than a large one that is
-modelled. The same principle governs the product.
+These are deliberately unglamorous. A modelled ₦45M/month would read better
+on this page and mean nothing in a diligence call.
 
 ---
 

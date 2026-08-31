@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VIIBE — Investor Brief</title>
+<title>VIIBE Investor Brief</title>
 <meta name="description" content="A decentralized sensor network for live human energy. Lagos nightlife is market one.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +35,7 @@ p { color: var(--smoke); margin-bottom: 16px; max-width: 62ch; }
 p b, li b { color: var(--bone); font-weight: 600; }
 ul { list-style: none; margin-bottom: 16px; }
 li { color: var(--smoke); padding-left: 22px; position: relative; margin-bottom: 10px; }
-li::before { content: '—'; position: absolute; left: 0; color: var(--ember); }
+li::before { content: 'A'; position: absolute; left: 0; color: var(--ember); }
 .strata { height: 3px; background: var(--ramp); border-radius: 2px; margin: 56px 0; }
 .panel { background: var(--ash); border: 1px solid var(--soot); border-radius: 10px; padding: 26px 28px; margin: 26px 0; }
 .panel .ph { display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .2em; color: var(--smoke); margin-bottom: 16px; }
@@ -63,67 +63,67 @@ footer { max-width: 880px; margin: 0 auto; padding: 0 5vw 50px; font-size: 12px;
 </head>
 <body>
 <main>
-  <div class="wordmark">VII<em>B</em>E — INVESTOR BRIEF</div>
+  <div class="wordmark">VII<em>B</em>E &middot; INVESTOR BRIEF</div>
 
-  <h1>A live map of <span class="hot">where the city is alive</span> right now.</h1>
-  <p style="font-size:19px; color:var(--bone); max-width:58ch;">In one line: <b>VIIBE shows you what's popping right now — based on the people who are actually there.</b></p>
-  <p>Underneath that map is the real asset: <b>a decentralized sensor network for live human energy.</b> Wherever people gather there is energy, and nobody measures it. Google's live-busyness barely covers Lagos; Instagram tells you about last night. VIIBE reads what a room feels like <b>right now</b>, from people verifiably in it — then sells that truth to the venues and machines that need it.</p>
+  <h1>Google Maps tells you how to get there.<br><span class="hot">VIIBE tells you if it's worth going.</span></h1>
+  <p style="font-size:19px; color:var(--bone); max-width:58ch;">A live reading of a room, taken by the people standing in it.</p>
+  <p>Lagos nightlife turns over hundreds of billions of naira a year across roughly four thousand venues, and nothing measures any of it. Retail counts footfall. Broadcast has ratings. The roads have live traffic. Nightlife has promoter claims and last week's stories. We built the instrument, and we sell what it reads to the people spending against it.</p>
 
-  <div class="eyebrow">EXHIBIT A — THIS NUMBER IS LIVE</div>
+  <div class="eyebrow">EXHIBIT A &middot; THIS NUMBER IS LIVE</div>
   <div class="panel">
-    <div class="ph"><span>CITY INSTRUMENT — LAGOS</span><span id="inst-time">CONNECTING…</span></div>
+    <div class="ph"><span>CITY INSTRUMENT &middot; LAGOS</span><span id="inst-time">CONNECTING…</span></div>
     <div id="pulse-row">
-      <span id="pulse-score" class="mono">—</span>
+      <span id="pulse-score" class="mono">&middot;&middot;</span>
       <span id="pulse-label">READING</span>
       <span id="pulse-meta"></span>
     </div>
   </div>
-  <p style="font-size:13px;" class="mono">Not a mockup. This brief reads the production API on load — the same feed the app, the venue screens, and the agent API consume. If Lagos is quiet right now, it says so.</p>
+  <p style="font-size:13px;" class="mono">Not a mockup. This brief reads the production API as it loads, the same feed the app, the venue screens and the agent API consume. If Lagos is quiet right now, it says so.</p>
 
   <div class="strata"></div>
 
   <div class="eyebrow">THE MARKET STRUCTURE</div>
   <h2>An intel market, not a listings app</h2>
   <ul>
-    <li><b>Scouts</b> (supply) submit geofenced 3-second vibe checks; every signal carries a credibility weight earned by track record. Scouts stake reputation on predictions and earn on accuracy.</li>
-    <li><b>Venues</b> (first buyers) pay for the truth about their own rooms: live watcher counts, verified-arrival attribution, and a weekly Lift Report that prices their promo spend in naira.</li>
-    <li><b>Agents & assistants</b> (the endgame) buy the aggregate feed. When someone asks <b>Siri, ChatGPT, Claude, or Gemini</b> "where is alive tonight?", the answer has to come from somewhere — no incumbent holds this signal. The agent-distribution API is live in production today; assistant integrations are the roadmap, and the acquirer thesis.</li>
+    <li><b>Scouts supply the readings.</b> Three seconds, from inside the geofence, weighted by how reliable that scout has proven to be over time.</li>
+    <li><b>Venues are the first buyers.</b> An owner can see their own floor; they are standing on it. What they cannot see is whether Saturday was good for a Saturday, whether the &#8358;500,000 DJ did anything, or how many people considered them at 10pm and went three streets over. We sell them that.</li>
+    <li><b>Assistants are the endgame.</b> Ask Siri, ChatGPT, Claude or Gemini where is good tonight and the answer has to come from somewhere. Nobody holds this signal for African cities. Our agent API and MCP server run in production now.</li>
   </ul>
 
   <div class="eyebrow">WHY THE SIGNAL IS DEFENSIBLE</div>
   <div class="grid2">
-    <div class="cell"><div class="t">DECAY-HONEST</div><p>Readings expire in minutes, like the energy itself. A quiet map is allowed to look quiet — trust is the moat.</p></div>
-    <div class="cell"><div class="t">PRESENCE-VERIFIED</div><p>Ratings and reactor charges are geofence-checked. Remote hype is damped 5x and can never drive peak status.</p></div>
-    <div class="cell"><div class="t">CORROBORATION-GATED</div><p>ELECTRIC — the level that fires city-wide alerts — requires 5+ verified-present scouts, a hot vibe check, and a 10-minute sustained hold. It cannot be faked by a group chat.</p></div>
-    <div class="cell"><div class="t">SCENE-AGNOSTIC</div><p>Rating taxonomies and the decay engine don't know what a nightclub is. Concerts, festivals, street events are configuration, not rebuilds.</p></div>
+    <div class="cell"><div class="t">DECAY-HONEST</div><p>Readings expire in minutes. A venue packed at 11 does not stay packed on the map at 2, and a quiet map is allowed to look quiet.</p></div>
+    <div class="cell"><div class="t">PRESENCE-VERIFIED</div><p>Ratings and charges are geofence checked. Taps from outside the room carry a fifth of the weight and can never drive a peak.</p></div>
+    <div class="cell"><div class="t">CORROBORATION-GATED</div><p>The top state fires city-wide alerts, so it demands five present scouts, a hot check and a ten minute hold. A group chat cannot manufacture it.</p></div>
+    <div class="cell"><div class="t">SCENE-AGNOSTIC</div><p>The engine has no idea what a nightclub is. Concerts, festivals and street events are configuration rather than rebuilds.</p></div>
   </div>
 
   <div class="eyebrow">WHY NIGHTLIFE, WHY LAGOS</div>
-  <p>Every horizontal platform won a vertical first. Nightlife is the beachhead because its energy decays fastest (minutes — where live intel is worth the most), a paying buyer exists tonight (venues spend heavily on promotion with zero attribution), and it's where the scout habit forms. Lagos is one of the world's great nightlife cities with the weakest incumbent data coverage.</p>
+  <p>Every horizontal platform won a vertical first. Nightlife earns that slot here for three unglamorous reasons. Its energy decays in minutes, which is exactly when live information is worth paying for. A buyer already exists tonight, spending heavily on promotion with no way to check what it bought. And it is where the habit of reporting forms. Lagos happens to be one of the world's great nightlife cities carrying the world's thinnest data coverage.</p>
 
-  <div class="eyebrow">THE PROOF PLAN — RUNNING NOW</div>
+  <div class="eyebrow">THE PROOF PLAN &middot; RUNNING NOW</div>
   <h2>Four Fridays, one corridor, falsifiable</h2>
-  <p>We don't ask anyone to imagine adoption. The rollout is a four-weekend experiment in the Lekki/VI corridor, Fridays 9pm–3am: <b>30 paid founding scouts, 10+ venues, a Big Screen on an anchor venue's wall, 2 merchant pilots receiving Lift Reports.</b> The metric on the wall is <b>repeat scout rate</b> — do this weekend's scouts come back next weekend. Every number lands on this page as it happens.</p>
+  <p>Nobody is asked to imagine adoption here. The rollout is a four weekend experiment in the Lekki and Victoria Island corridor, Fridays 9pm to 3am, with <b>30 paid founding scouts, 10 or more venues, a Big Screen on an anchor venue's wall, and two merchant pilots receiving Lift Reports.</b> One number decides it: <b>do this weekend's scouts come back next weekend.</b> Every figure lands on this page as it happens.</p>
   <table>
     <tr><th>CORRIDOR EVIDENCE</th><th>STATUS</th></tr>
     <tr><td>Consecutive live Fridays</td><td class="mono" id="ev-1"><b>launching</b></td></tr>
     <tr><td>Founding scouts active / returning</td><td class="mono" id="ev-2"><b>recruiting</b></td></tr>
-    <tr><td>Venues with merchant access requested</td><td class="mono" id="ev-3"><b>—</b></td></tr>
-    <tr><td>Paying merchants</td><td class="mono" id="ev-4"><b>—</b></td></tr>
+    <tr><td>Venues with merchant access requested</td><td class="mono" id="ev-3"><b>&middot;&middot;</b></td></tr>
+    <tr><td>Paying merchants</td><td class="mono" id="ev-4"><b>&middot;&middot;</b></td></tr>
   </table>
   <p style="font-size:13px;" class="mono">Updated weekly during the corridor run. Blank cells stay blank until they're true.</p>
 
   <div class="eyebrow">WHAT EXISTS TODAY</div>
   <ul>
     <li><b>Shipped product</b>: Android app (map, vibe checks, reactor), venue Big Screen projection mode, merchant dashboard with live watcher counts, attribution + Lift Report engine, agent-distribution API. All live in production.</li>
-    <li><b>Revenue design that doesn't wait for scale</b>: merchant analytics monetize with a handful of scouts and one paying venue — liquidity risk is decoupled from revenue risk.</li>
+    <li><b>Revenue that does not wait for scale.</b> Merchant analytics earn with a handful of scouts and a single paying venue, so the business does not have to survive a liquidity race first. Most apps in this category died in that race.</li>
     <li><b>Lean structure</b>: founder-funded runway, near-zero burn, the entire stack on commodity infra.</li>
   </ul>
 
   <div class="strata"></div>
 
   <p class="creed">We would rather show you <b>nothing</b> than lie to you.</p>
-  <p style="font-size:13px;" class="mono">THE SIGNAL CREED — it applies to this page too.</p>
+  <p style="font-size:13px;" class="mono">THE SIGNAL CREED. IT APPLIES TO THIS PAGE TOO.</p>
 
   <div class="eyebrow">CONTACT</div>
   <p><b>Oluyori Ajagun</b>, founder. Live demo of the map, a venue Big Screen, and the corridor plan on a call.</p>
